@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaMastery - Learn Java Programming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f8981c;
+            --primary-dark: #e07b0a;
+            --primary-light: #ffc678;
+            --secondary: #2d3748;
+            --accent: #5382a1;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-light: #f7fafc;
+            --text-muted: #a0aec0;
+            --success: #48bb78;
+            --gradient-1: linear-gradient(135deg, #f8981c 0%, #e07b0a 100%);
+            --gradient-2: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(248, 152, 28, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(83, 130, 161, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 20px) rotate(5deg); }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(248, 152, 28, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .toc {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .toc h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .toc-item:hover {
+            background: rgba(248, 152, 28, 0.1);
+            border-color: rgba(248, 152, 28, 0.3);
+            transform: translateX(5px);
+        }
+
+        .toc-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .lesson-section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-section h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lesson-section .badge {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .lesson-section > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .concept {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .concept h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .concept h4 {
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text-light);
+        }
+
+        .concept p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .concept ul, .concept ol {
+            color: var(--text-muted);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: #0d0d1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid rgba(248, 152, 28, 0.2);
+        }
+
+        .code-block pre {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #abb2bf;
+        }
+
+        .code-block .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        .code-block .keyword {
+            color: #c678dd;
+        }
+
+        .code-block .class {
+            color: #e5c07b;
+        }
+
+        .code-block .method {
+            color: #61afef;
+        }
+
+        .code-block .string {
+            color: #98c379;
+        }
+
+        .code-block .number {
+            color: #d19a66;
+        }
+
+        .code-block .annotation {
+            color: #d19a66;
+        }
+
+        .note {
+            background: rgba(248, 152, 28, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .note h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .note p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .tip {
+            background: rgba(72, 187, 120, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .tip h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tip p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .warning {
+            background: rgba(245, 101, 101, 0.1);
+            border-left: 4px solid #f56565;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .warning h4 {
+            color: #f56565;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .warning p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .example-box {
+            background: rgba(83, 130, 161, 0.1);
+            border: 1px solid rgba(83, 130, 161, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example-box h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .do-dont {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .do-box {
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .do-box h4 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .dont-box {
+            background: rgba(245, 101, 101, 0.1);
+            border: 1px solid #f56565;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .dont-box h4 {
+            color: #f56565;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--bg-card);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 999;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">J</div>
+                JavaMastery
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lessons.html" class="active">Lessons</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Learn <span>Java</span> Programming</h1>
+            <p>A comprehensive guide to mastering Java from fundamentals to advanced concepts. Each lesson includes detailed explanations, multiple examples, and best practices.</p>
+        </div>
+
+        <div class="toc">
+            <h2>📚 Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#module1" class="toc-item">
+                    <h3>Module 1: Java Fundamentals</h3>
+                    <p>Variables, data types, operators, control flow, and methods</p>
+                </a>
+                <a href="#module2" class="toc-item">
+                    <h3>Module 2: Object-Oriented Programming</h3>
+                    <p>Classes, objects, inheritance, polymorphism, interfaces</p>
+                </a>
+                <a href="#module3" class="toc-item">
+                    <h3>Module 3: Data Structures</h3>
+                    <p>Arrays, collections, lists, maps, sets</p>
+                </a>
+                <a href="#module4" class="toc-item">
+                    <h3>Module 4: Algorithms</h3>
+                    <p>Searching, sorting, time complexity, big O notation</p>
+                </a>
+                <a href="#module5" class="toc-item">
+                    <h3>Module 5: Exception Handling</h3>
+                    <p>Try-catch, throws, custom exceptions, best practices</p>
+                </a>
+                <a href="#module6" class="toc-item">
+                    <h3>Module 6: File I/O</h3>
+                    <p>Reading/writing files, streams, serialization</p>
+                </a>
+                <a href="#module7" class="toc-item">
+                    <h3>Module 7: Generics</h3>
+                    <p>Generic classes, methods, wildcards, bounds</p>
+                </a>
+                <a href="#module8" class="toc-item">
+                    <h3>Module 8: Lambdas & Streams</h3>
+                    <p>Functional programming, lambda expressions, stream API</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- MODULE 1: Java Fundamentals -->
+        <div id="module1" class="lesson-section">
+            <h2>📖 Module 1: Java Fundamentals <span class="badge">Beginner</span></h2>
+            <p>This module covers the building blocks of Java programming. Understanding these concepts is essential before moving to more advanced topics.</p>
+
+            <div class="concept">
+                <h3>1.1 Variables and Data Types</h3>
+                
+                <h4>What is a Variable?</h4>
+                <p>A variable is a container that holds a value which can change during program execution. Think of it as a labeled box where you store data. In Java, you must declare a variable before using it, specifying its type.</p>
+
+                <h4>Primitive Data Types</h4>
+                <p>Java has 8 primitive data types that represent the most basic types of data. They are called "primitive" because they are not objects and are stored directly in memory.</p>
+                
+                <ul>
+                    <li><strong>byte</strong> - 8-bit integer (-128 to 127)</li>
+                    <li><strong>short</strong> - 16-bit integer (-32,768 to 32,767)</li>
+                    <li><strong>int</strong> - 32-bit integer (-2,147,483,648 to 2,147,483,647)</li>
+                    <li><strong>long</strong> - 64-bit integer (very large range)</li>
+                    <li><strong>float</strong> - 32-bit floating point (decimal numbers)</li>
+                    <li><strong>double</strong> - 64-bit floating point (more precise decimals)</li>
+                    <li><strong>boolean</strong> - true or false</li>
+                    <li><strong>char</strong> - single character (16-bit Unicode)</li>
+                </ul>
+
+                <h4>Reference Data Types</h4>
+                <p>Reference types are objects that store references to memory locations. Common reference types include:</p>
+                <ul>
+                    <li><strong>String</strong> - sequence of characters</li>
+                    <li><strong>Arrays</strong> - ordered collection of elements</li>
+                    <li><strong>Classes</strong> - user-defined types</li>
+                    <li><strong>Interfaces</strong> - abstract types</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Primitive type examples</span>
+<span class="keyword">int</span> age = <span class="number">25</span>;
+<span class="keyword">double</span> price = <span class="number">19.99</span>;
+<span class="keyword">boolean</span> isActive = <span class="keyword">true</span>;
+<span class="keyword">char</span> grade = <span class="string">'A'</span>;
+
+<span class="comment">// Reference type examples</span>
+<span class="class">String</span> name = <span class="string">"JavaMastery"</span>;
+<span class="class">Integer</span> wrappedInt = <span class="number">42</span>;  <span class="comment">// Wrapper class</span></code></pre>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example: Choosing the Right Type</h4>
+                    <p>When should you use each numeric type?</p>
+                    <ul>
+                        <li>Use <code>int</code> for most whole numbers (most common choice)</li>
+                        <li>Use <code>long</code> when you need numbers larger than 2 billion</li>
+                        <li>Use <code>double</code> for decimal calculations (scientific, financial)</li>
+                        <li>Use <code>float</code> only when memory is a concern and precision is less important</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <h4>💡 Key Insight: Primitive vs Reference</h4>
+                    <p>Primitive variables store the actual value. Reference variables store a memory address (reference) to the object. This distinction affects how variables are passed to methods and compared.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>1.2 Operators</h3>
+                
+                <h4>Arithmetic Operators</h4>
+                <p>These operators perform mathematical calculations:</p>
+                <ul>
+                    <li><code>+</code> - Addition</li>
+                    <li><code>-</code> - Subtraction</li>
+                    <li><code>*</code> - Multiplication</li>
+                    <li><code>/</code> - Division</li>
+                    <li><code>%</code> - Modulus (remainder)</li>
+                    <li><code>++</code> - Increment by 1</li>
+                    <li><code>--</code> - Decrement by 1</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">int</span> a = <span class="number">10</span>;
+<span class="keyword">int</span> b = <span class="number">3</span>;
+
+System.out.println(a + b);  <span class="comment">// 13</span>
+System.out.println(a - b);  <span class="comment">// 7</span>
+System.out.println(a * b);  <span class="comment">// 30</span>
+System.out.println(a / b);  <span class="comment">// 3 (integer division)</span>
+System.out.println(a % b);  <span class="comment">// 1 (remainder)</span></code></pre>
+                </div>
+
+                <h4>Comparison Operators</h4>
+                <p>These return boolean values (<code>true</code> or <code>false</code>):</p>
+                <ul>
+                    <li><code>==</code> - Equal to</li>
+                    <li><code>!=</code> - Not equal to</li>
+                    <li><code>></code> - Greater than</li>
+                    <li><code><</code> - Less than</li>
+                    <li><code>>=</code> - Greater than or equal</li>
+                    <li><code><=</code> - Less than or equal</li>
+                </ul>
+
+                <h4>Logical Operators</h4>
+                <p>Combine boolean expressions:</p>
+                <ul>
+                    <li><code>&&</code> - AND (both must be true)</li>
+                    <li><code>||</code> - OR (at least one must be true)</li>
+                    <li><code>!</code> - NOT (negates the value)</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">int</span> age = <span class="number">20</span>;
+<span class="keyword">boolean</span> isAdult = age >= <span class="number">18</span>;
+<span class="keyword">boolean</span> hasLicense = <span class="keyword">true</span>;
+
+<span class="comment">// Can drive if adult AND has license</span>
+<span class="keyword">boolean</span> canDrive = isAdult && hasLicense;
+
+<span class="comment">// Can vote if adult OR is senior</span>
+<span class="keyword">boolean</span> canVote = age >= <span class="number">18</span> || age >= <span class="number">65</span>;</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>1.3 Control Flow</h3>
+                
+                <h4>If-Else Statements</h4>
+                <p>Control which code blocks execute based on conditions.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">int</span> score = <span class="number">85</span>;
+
+<span class="keyword">if</span> (score >= <span class="number">90</span>) {
+    System.out.println(<span class="string">"Grade: A - Excellent!"</span>);
+} <span class="keyword">else if</span> (score >= <span class="number">80</span>) {
+    System.out.println(<span class="string">"Grade: B - Good job!"</span>);
+} <span class="keyword">else if</span> (score >= <span class="number">70</span>) {
+    System.out.println(<span class="string">"Grade: C - Satisfactory"</span>);
+} <span class="keyword">else if</span> (score >= <span class="number">60</span>) {
+    System.out.println(<span class="string">"Grade: D - Needs improvement"</span>);
+} <span class="keyword">else</span> {
+    System.out.println(<span class="string">"Grade: F - Failed"</span>);
+}</code></pre>
+                </div>
+
+                <h4>Switch Statements</h4>
+                <p>Use when you have many conditions to check against a single value. More readable than multiple if-else statements.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="class">String</span> day = <span class="string">"Monday"</span>;
+
+<span class="keyword">switch</span> (day) {
+    <span class="keyword">case</span> <span class="string">"Monday"</span>:
+    System.out.println(<span class="string">"Start of work week"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Friday"</span>:
+    System.out.println(<span class="string">"TGIF!"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Saturday"</span>:
+    <span class="keyword">case</span> <span class="string">"Sunday"</span>:
+        System.out.println(<span class="string">"Weekend! Enjoy!"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        System.out.println(<span class="string">"Regular weekday"</span>);
+}</code></pre>
+                </div>
+
+                <h4>Loops</h4>
+                
+                <h4>For Loop</h4>
+                <p>Use when you know exactly how many times to repeat.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Print numbers 0 to 4</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+    System.out.println(<span class="string">"Count: "</span> + i);
+}
+
+<span class="comment">// Iterate over array</span>
+<span class="class">String</span>[] fruits = {<span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span>};
+<span class="keyword">for</span> (<span class="class">String</span> fruit : fruits) {
+    System.out.println(fruit);
+}</code></pre>
+                </div>
+
+                <h4>While Loop</h4>
+                <p>Use when you don't know the number of iterations in advance.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// While condition is true</span>
+<span class="keyword">int</span> count = <span class="number">0</span>;
+<span class="keyword">while</span> (count < <span class="number">5</span>) {
+    System.out.println(count);
+    count++;
+}
+
+<span class="comment">// Do-while: executes at least once</span>
+<span class="keyword">int</span> num = <span class="number">0</span>;
+<span class="keyword">do</span> {
+    System.out.println(num);
+    num++;
+} <span class="keyword">while</span> (num < <span class="number">5</span>);</code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Pro Tip</h4>
+                    <p>Prefer enhanced for loops (for-each) when iterating over arrays or collections. They're more concise and less prone to off-by-one errors.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>1.4 Methods</h3>
+                
+                <h4>What is a Method?</h4>
+                <p>A method is a reusable block of code that performs a specific task. Methods promote code reusability and help organize your program into logical blocks.</p>
+
+                <h4>Method Structure</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">/**
+ * Calculates the sum of two integers
+ * @param a the first number
+ * @param b the second number
+ * @return the sum of a and b
+ */</span>
+<span class="keyword">public static int</span> <span class="method">calculateSum</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+    <span class="keyword">int</span> sum = a + b;
+    <span class="keyword">return</span> sum;  <span class="comment">// returns the result</span>
+}
+
+<span class="comment">// Method that returns nothing (void)</span>
+<span class="keyword">public static void</span> <span class="method">printMessage</span>(<span class="class">String</span> message) {
+    System.out.println(<span class="string">"Message: "</span> + message);
+}</code></pre>
+                </div>
+
+                <h4>Method Overloading</h4>
+                <p>Multiple methods can have the same name but different parameters. The compiler decides which one to call based on the arguments.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Same method name, different parameters</span>
+<span class="keyword">public static int</span> <span class="method">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="keyword">public static int</span> <span class="method">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) {
+    <span class="keyword">return</span> a + b + c;
+}
+
+<span class="keyword">public static double</span> <span class="method">add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="comment">// Usage</span>
+add(<span class="number">5</span>, <span class="number">3</span>);        <span class="comment">// calls first method</span>
+add(<span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>);    <span class="comment">// calls second method</span>
+add(<span class="number">5.5</span>, <span class="number">3.2</span>);    <span class="comment">// calls third method</span></code></pre>
+                </div>
+
+                <h4>Variable Scope</h4>
+                <p>Where a variable can be accessed depends on where it was declared:</p>
+                <ul>
+                    <li><strong>Local variables</strong> - declared inside methods, only accessible within that method</li>
+                    <li><strong>Instance variables</strong> - declared in a class, accessible to all methods of that class</li>
+                    <li><strong>Class variables</strong> - declared with static, accessible without creating an object</li>
+                    <li><strong>Parameters</strong> - declared in method signature, local to that method</li>
+                </ul>
+
+                <div class="warning">
+                    <h4>⚠️ Common Mistake</h4>
+                    <p>Don't confuse the scope of variables. A local variable inside a loop only exists within that loop iteration. Using it outside will cause a compile error.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: Object-Oriented Programming -->
+        <div id="module2" class="lesson-section">
+            <h2>📖 Module 2: Object-Oriented Programming <span class="badge">Intermediate</span></h2>
+            <p>OOP is a paradigm that organizes code around objects rather than functions. Java is inherently object-oriented, making it essential to understand these concepts.</p>
+
+            <div class="concept">
+                <h3>2.1 Classes and Objects</h3>
+                
+                <h4>What is a Class?</h4>
+                <p>A class is a blueprint or template for creating objects. It defines what attributes (fields) and behaviors (methods) objects of that type will have.</p>
+
+                <h4>What is an Object?</h4>
+                <p>An object is an instance of a class. While a class is abstract (a blueprint), objects are concrete (actual things you can work with).</p>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Define a class (blueprint)</span>
+<span class="keyword">public class</span> <span class="class">Car</span> {
+    <span class="comment">// Fields (attributes) - instance variables</span>
+    <span class="keyword">private</span> <span class="class">String</span> brand;
+    <span class="keyword">private</span> <span class="class">String</span> model;
+    <span class="keyword">private int</span> year;
+    <span class="keyword">private double</span> price;
+    
+    <span class="comment">// Constructor - initializes new objects</span>
+    <span class="keyword">public</span> <span class="method">Car</span>(<span class="class">String</span> brand, <span class="class">String</span> model, <span class="keyword">int</span> year, <span class="keyword">double</span> price) {
+        <span class="keyword">this</span>.brand = brand;
+        <span class="keyword">this</span>.model = model;
+        <span class="keyword">this</span>.year = year;
+        <span class="keyword">this</span>.price = price;
+    }
+    
+    <span class="comment">// Methods (behaviors)</span>
+    <span class="keyword">public void</span> <span class="method">start</span>() {
+        System.out.println(brand + <span class="string">" "</span> + model + <span class="string">" is starting..."</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">stop</span>() {
+        System.out.println(brand + <span class="string">" "</span> + model + <span class="string">" has stopped."</span>);
+    }
+    
+    <span class="comment">// Getters and Setters</span>
+    <span class="keyword">public</span> <span class="class">String</span> <span class="method">getBrand</span>() {
+        <span class="keyword">return</span> brand;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">setBrand</span>(<span class="class">String</span> brand) {
+        <span class="keyword">this</span>.brand = brand;
+    }
+    
+    <span class="comment">// Other getters omitted for brevity</span>
+}</code></pre>
+                </div>
+
+                <h4>Creating Objects</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Create instances (objects) of the Car class</span>
+<span class="class">Car</span> myCar = <span class="keyword">new</span> <span class="class">Car</span>(<span class="string">"Tesla"</span>, <span class="string">"Model 3"</span>, <span class="number">2024</span>, <span class="number">42990.0</span>);
+<span class="class">Car</span> dadCar = <span class="keyword">new</span> <span class="class">Car</span>(<span class="string">"Toyota"</span>, <span class="string">"Camry"</span>, <span class="number">2022</span>, <span class="number">28000.0</span>);
+
+<span class="comment">// Call methods on objects</span>
+myCar.<span class="method">start</span>();  <span class="comment">// Tesla Model 3 is starting...</span>
+dadCar.<span class="method">start</span>();  <span class="comment">// Toyota Camry is starting...</span></code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Key Concept: Constructor</h4>
+                    <p>A constructor is a special method that gets called when you create a new object with the <code>new</code> keyword. It's used to initialize the object's state (set initial values to fields).</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2.2 Encapsulation</h3>
+                
+                <h4>What is Encapsulation?</h4>
+                <p>Encapsulation is the practice of bundling data (fields) and methods together in a class, while restricting direct access to some of an object's components. This protects data from unauthorized modification and ensures the object remains in a valid state.</p>
+
+                <h4>Why Use Encapsulation?</h4>
+                <ul>
+                    <li><strong>Data Protection</strong> - Prevent invalid data from being assigned</li>
+                    <li><strong>Flexibility</strong> - Change internal implementation without affecting external code</li>
+                    <li><strong>Maintainability</strong> - Easier to debug and maintain code</li>
+                    <li><strong>Information Hiding</strong> - Hide implementation details</li>
+                </ul>
+
+                <h4>How to Achieve Encapsulation</h4>
+                <ol>
+                    <li>Make fields <code>private</code> - no direct access from outside</li>
+                    <li>Create public getter methods - allow reading values</li>
+                    <li>Create public setter methods - allow modifying values with validation</li>
+                </ol>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">public class</span> <span class="class">BankAccount</span> {
+    <span class="comment">// Private - cannot be accessed directly</span>
+    <span class="keyword">private double</span> balance;
+    <span class="keyword">private</span> <span class="class">String</span> accountNumber;
+    
+    <span class="comment">// Public getter</span>
+    <span class="keyword">public double</span> <span class="method">getBalance</span>() {
+        <span class="keyword">return</span> balance;
+    }
+    
+    <span class="comment">// Public setter with validation</span>
+    <span class="keyword">public void</span> <span class="method">setBalance</span>(<span class="keyword">double</span> balance) {
+        <span class="keyword">if</span> (balance >= <span class="number">0</span>) {
+            <span class="keyword">this</span>.balance = balance;
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Error: Balance cannot be negative!"</span>);
+        }
+    }
+    
+    <span class="comment">// Deposit with validation</span>
+    <span class="keyword">public void</span> <span class="method">deposit</span>(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span>) {
+            balance += amount;
+            System.out.println(<span class="string">"Deposited: $"</span> + amount);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Invalid deposit amount"</span>);
+        }
+    }
+}</code></pre>
+                </div>
+
+                <div class="example-box">
+                    <h4>Without Encapsulation - Problems:</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// BAD: Direct access to fields (dangerous!)</span>
+<span class="class">BankAccount</span> account = <span class="keyword">new</span> <span class="class">BankAccount</span>();
+account.balance = -<span class="number">1000</span>;  <span class="comment">// Invalid! Negative balance</span>
+account.balance = <span class="number">1000000</span>;  <span class="comment">// Could steal money!</span></code></pre>
+                    </div>
+
+                    <h4>With Encapsulation - Protected:</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// GOOD: Controlled access through methods</span>
+<span class="class">BankAccount</span> account = <span class="keyword">new</span> <span class="class">BankAccount</span>();
+account.setBalance(-<span class="number">1000</span>);  <span class="comment">// Rejected! Shows error message</span>
+account.deposit(<span class="number">100</span>);  <span class="comment">// Accepted and validated</span></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2.3 Inheritance</h3>
+                
+                <h4>What is Inheritance?</h4>
+                <p>Inheritance allows a class (called a subclass or child class) to inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy.</p>
+
+                <h4>Key Terms</h4>
+                <ul>
+                    <li><strong>Superclass (Parent)</strong> - The class being inherited from</li>
+                    <li><strong>Subclass (Child)</strong> - The class that inherits</li>
+                    <li><strong>extends</strong> - Keyword used to declare inheritance</li>
+                    <li><strong>super</strong> - Reference to the parent class</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Parent class (superclass)</span>
+<span class="keyword">public class</span> <span class="class">Animal</span> {
+    <span class="keyword">protected</span> <span class="class">String</span> name;
+    <span class="keyword">protected int</span> age;
+    
+    <span class="keyword">public</span> <span class="method">Animal</span>(<span class="class">String</span> name, <span class="keyword">int</span> age) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+    }
+    
+    <span class="comment">// Common method for all animals</span>
+    <span class="keyword">public void</span> <span class="method">makeSound</span>() {
+        System.out.println(<span class="string">"Some sound"</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">eat</span>() {
+        System.out.println(name + <span class="string">" is eating"</span>);
+    }
+}
+
+<span class="comment">// Child class inherits from Animal</span>
+<span class="keyword">public class</span> <span class="class">Dog</span> <span class="keyword">extends</span> <span class="class">Animal</span> {
+    
+    <span class="comment">// Additional field specific to Dog</span>
+    <span class="keyword">private</span> <span class="class">String</span> breed;
+    
+    <span class="comment">// Constructor - calls parent constructor using super()</span>
+    <span class="keyword">public</span> <span class="method">Dog</span>(<span class="class">String</span> name, <span class="keyword">int</span> age, <span class="class">String</span> breed) {
+        <span class="keyword">super</span>(name, age);  <span class="comment">// Call parent constructor</span>
+        <span class="keyword">this</span>.breed = breed;
+    }
+    
+    <span class="comment">// Override parent method</span>
+    @Override  <span class="comment">// Annotation - helps catch errors</span>
+    <span class="keyword">public void</span> <span class="method">makeSound</span>() {
+        System.out.println(<span class="string">"Woof! Woof!"</span>);
+    }
+    
+    <span class="comment">// New method specific to Dog</span>
+    <span class="keyword">public void</span> <span class="method">fetch</span>() {
+        System.out.println(name + <span class="string">" is fetching the ball!"</span>);
+    }
+}</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4>💡 The @Override Annotation</h4>
+                    <p>When you override a method, always use the @Override annotation. It tells the compiler that you intend to override a method from the parent class. If you make a mistake (like misspelling the method name), the compiler will give you an error.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2.4 Polymorphism</h3>
+                
+                <h4>What is Polymorphism?</h4>
+                <p>Polymorphism means "many forms". In Java, this allows a single reference type to refer to objects of different classes. A subclass object can be treated as a parent class object.</p>
+
+                <h4>Types of Polymorphism</h4>
+                <ol>
+                    <li><strong>Compile-time (Method Overloading)</strong> - Multiple methods with same name, different parameters</li>
+                    <li><strong>Runtime (Method Overriding)</strong> - Subclass provides specific implementation of parent method</li>
+                </ol>
+
+                <h4>Polymorphism in Action</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Parent reference can hold child objects</span>
+<span class="class">Animal</span>[] animals = <span class="keyword">new</span> <span class="class">Animal</span>[<span class="number">3</span>];
+
+animals[<span class="number">0</span>] = <span class="keyword">new</span> <span class="class">Dog</span>(<span class="string">"Rex"</span>, <span class="number">3</span>, <span class="string">"Golden Retriever"</span>);
+animals[<span class="number">1</span>] = <span class="keyword">new</span> <span class="class">Cat</span>(<span class="string">"Whiskers"</span>, <span class="number">2</span>);
+animals[<span class="number">2</span>] = <span class="keyword">new</span> <span class="class">Bird</span>(<span class="string">"Tweety"</span>, <span class="number">1</span>);
+
+<span class="comment">// Each object uses its own makeSound() method</span>
+<span class="keyword">for</span> (<span class="class">Animal</span> animal : animals) {
+    animal.<span class="method">makeSound</span>();
+}
+<span class="comment">// Output:
+<span class="comment">// Woof! Woof!</span>
+<span class="comment">// Meow!</span>
+<span class="comment">// Tweet!</span></code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Remember</h4>
+                    <p>Polymorphism lets you write code that works with general types (like Animal) but behaves differently depending on the actual object type (Dog, Cat, Bird).</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2.5 Interfaces</h3>
+                
+                <h4>What is an Interface?</h4>
+                <p>An interface is a contract that defines a set of methods that a class must implement. It provides full abstraction (no implementation details) and supports multiple inheritance.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Interface definition - defines what to do, not how</span>
+<span class="keyword">public interface</span> <span class="class">Drawable</span> {
+    <span class="comment">// All methods are implicitly abstract (no implementation)</span>
+    <span class="keyword">void</span> <span class="method">draw</span>();
+    <span class="keyword">void</span> <span class="method">resize</span>(<span class="keyword">double</span> factor);
+}</code></pre>
+                </div>
+
+                <h4>Implementing an Interface</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Class implements the interface</span>
+<span class="keyword">public class</span> <span class="class">Circle</span> <span class="keyword">implements</span> <span class="class">Drawable</span> {
+    <span class="keyword">private double</span> radius;
+    
+    <span class="keyword">public</span> <span class="method">Circle</span>(<span class="keyword">double</span> radius) {
+        <span class="keyword">this</span>.radius = radius;
+    }
+    
+    <span class="comment">// Must implement all interface methods</span>
+    @Override
+    <span class="keyword">public void</span> <span class="method">draw</span>() {
+        System.out.println(<span class="string">"Drawing a circle with radius "</span> + radius);
+    }
+    
+    @Override
+    <span class="keyword">public void</span> <span class="method">resize</span>(<span class="keyword">double</span> factor) {
+        radius *= factor;
+    }
+}</code></pre>
+                </div>
+
+                <h4>Why Use Interfaces?</h4>
+                <ul>
+                    <li><strong>Multiple Inheritance</strong> - A class can implement multiple interfaces</li>
+                    <li><strong>Loose Coupling</strong> - Code depends on abstractions, not implementations</li>
+                    <li><strong>Contract</strong> - Guarantees certain methods exist</li>
+                    <li><strong>Flexibility</strong> - Easy to change implementations</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Real-World Example: Payment Systems</h4>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public interface</span> <span class="class">PaymentMethod</span> {
+    <span class="keyword">void</span> <span class="method">processPayment</span>(<span class="keyword">double</span> amount);
+    <span class="keyword">void</span> <span class="method">refund</span>(<span class="keyword">double</span> amount);
+}
+
+<span class="keyword">public class</span> <span class="class">CreditCard</span> <span class="keyword">implements</span> <span class="class">PaymentMethod</span> { ... }
+<span class="keyword">public class</span> <span class="class">PayPal</span> <span class="keyword">implements</span> <span class="class">PaymentMethod</span> { ... }
+<span class="keyword">public class</span> <span class="class">Crypto</span> <span class="keyword">implements</span> <span class="class">PaymentMethod</span> { ... }
+
+<span class="comment">// Any payment method can be used interchangeably</span>
+<span class="keyword">public void</span> <span class="method">checkout</span>(<span class="class">PaymentMethod</span> method, <span class="keyword">double</span> amount) {
+    method.<span class="method">processPayment</span>(amount);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 3: Data Structures -->
+        <div id="module3" class="lesson-section">
+            <h2>📖 Module 3: Data Structures <span class="badge">Intermediate</span></h2>
+            <p>Data structures are ways of organizing and storing data so it can be accessed and modified efficiently. Understanding them is crucial for writing performant code.</p>
+
+            <div class="concept">
+                <h3>3.1 Arrays</h3>
+                
+                <h4>What is an Array?</h4>
+                <p>An array is a fixed-size, ordered collection of elements of the same type. Once created, the size cannot change.</p>
+
+                <h4>Declaring and Initializing Arrays</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Different ways to create arrays</span>
+<span class="comment">// Method 1: Declare and create separately</span>
+<span class="keyword">int</span>[] numbers = <span class="keyword">new int</span>[<span class="number">5</span>];  <span class="comment">// Array of 5 integers, all initialized to 0</span>
+
+<span class="comment">// Method 2: Declare and initialize with values</span>
+<span class="class">String</span>[] fruits = {<span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Mango"</span>};
+
+<span class="comment">// Method 3: Create empty array then assign values</span>
+<span class="keyword">double</span>[] prices = <span class="keyword">new double</span>[<span class="number">3</span>];
+prices[<span class="number">0</span>] = <span class="number">19.99</span>;
+prices[<span class="number">1</span>] = <span class="number">29.99</span>;
+prices[<span class="number">2</span>] = <span class="number">9.99</span>;</code></pre>
+                </div>
+
+                <h4>Accessing Array Elements</h4>
+                <div class="code-block">
+                    <pre><code><span class="class">String</span>[] days = {<span class="string">"Mon"</span>, <span class="string">"Tue"</span>, <span class="string">"Wed"</span>, <span class="string">"Thu"</span>, <span class="string">"Fri"</span>};
+
+<span class="comment">// Access by index (0-based)</span>
+System.out.println(days[<span class="number">0</span>]);  <span class="comment">// "Mon"</span>
+System.out.println(days[<span class="number">2</span>);  <span class="comment">// "Wed"</span>
+
+<span class="comment">// Get array length</span>
+System.out.println(days.length);  <span class="comment">// 5</span>
+
+<span class="comment">// Loop through array</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < days.length; i++) {
+    System.out.println(days[i]);
+}
+
+<span class="comment">// Enhanced for loop (for-each)</span>
+<span class="keyword">for</span> (<span class="class">String</span> day : days) {
+    System.out.println(day);
+}</code></pre>
+                </div>
+
+                <div class="warning">
+                    <h4>⚠️ Array Index Out of Bounds</h4>
+                    <p>Remember: Array indices start at 0, not 1. If you try to access an index that doesn't exist (negative or >= length), you'll get an ArrayIndexOutOfBoundsException.</p>
+                </div>
+
+                <h4>Common Array Operations</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">int</span>[] nums = {<span class="number">5</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>};
+
+<span class="comment">// Find maximum</span>
+<span class="keyword">int</span> max = nums[<span class="number">0</span>];
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i < nums.length; i++) {
+    <span class="keyword">if</span> (nums[i] > max) max = nums[i];
+}
+
+<span class="comment">// Calculate sum</span>
+<span class="keyword">int</span> sum = <span class="number">0</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> num : nums) {
+    sum += num;
+}
+
+<span class="comment">// Find element</span>
+<span class="keyword">int</span> target = <span class="number">8</span>;
+<span class="keyword">boolean</span> found = <span class="keyword">false</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> num : nums) {
+    <span class="keyword">if</span> (num == target) {
+        found = <span class="keyword">true</span>;
+        <span class="keyword">break</span>;
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3.2 ArrayList</h3>
+                
+                <h4>What is ArrayList?</h4>
+                <p>ArrayList is part of Java's Collections Framework. Unlike arrays, ArrayLists are dynamic - they can grow and shrink as needed.</p>
+
+                <h4>Key Differences from Arrays</h4>
+                <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                    <tr style="background: rgba(255,255,255,0.1);">
+                        <th style="padding: 10px; text-align: left;">Array</th>
+                        <th style="padding: 10px; text-align: left;">ArrayList</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">Fixed size</td>
+                        <td style="padding: 10px;">Dynamic size</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 10px;">Can store primitives</td>
+                        <td style="padding: 10px;">Stores objects only (wrapper classes)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">No built-in methods</td>
+                        <td style="padding: 10px;">Many useful methods</td>
+                    </tr>
+                </table>
+
+                <h4>Working with ArrayList</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.util.ArrayList;
+
+<span class="comment">// Create an ArrayList</span>
+<span class="class">ArrayList</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> names = <span class="keyword">new</span> <span class="class">ArrayList</span><>();
+
+<span class="comment">// Add elements</span>
+names.<span class="method">add</span>(<span class="string">"Alice"</span>);
+names.<span class="method">add</span>(<span class="string">"Bob"</span>);
+names.<span class="method">add</span>(<span class="number">1</span>, <span class="string">"Charlie"</span>);  <span class="comment">// Insert at index 1</span>
+
+<span class="comment">// Get elements</span>
+<span class="class">String</span> first = names.<span class="method">get</span>(<span class="number">0</span>);  <span class="comment">// "Alice"</span>
+
+<span class="comment">// Update elements</span>
+names.<span class="method">set</span>(<span class="number">0</span>, <span class="string">"Amanda"</span>);  <span class="comment">// Replace Alice</span>
+
+<span class="comment">// Remove elements</span>
+names.<span class="method">remove</span>(<span class="string">"Bob"</span>);  <span class="comment">// Remove by value</span>
+names.<span class="method">remove</span>(<span class="number">0</span>);  <span class="comment">// Remove by index</span>
+
+<span class="comment">// Check contents</span>
+<span class="keyword">boolean</span> hasAlice = names.<span class="method">contains</span>(<span class="string">"Alice"</span>);
+<span class="keyword">int</span> size = names.<span class="method">size</span>();
+<span class="keyword">boolean</span> isEmpty = names.<span class="method">isEmpty</span>();</code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Pro Tip</h4>
+                    <p>When you need primitive types in an ArrayList, use their wrapper classes: <code>Integer</code> instead of <code>int</code>, <code>Double</code> instead of <code>double</code>, etc.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3.3 HashMap</h3>
+                
+                <h4>What is HashMap?</h4>
+                <p>HashMap stores data in key-value pairs. Each key maps to exactly one value. It's incredibly fast for lookups - O(1) on average.</p>
+
+                <h4>When to Use HashMap</h4>
+                <ul>
+                    <li>When you need to look up values by a unique identifier (key)</li>
+                    <li>When data doesn't need to be ordered</li>
+                    <li>When you want fast retrieval by key</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.util.HashMap;
+
+<span class="comment">// Create a HashMap</span>
+<span class="class">HashMap</span><span class="keyword"><</span><span class="class">String</span>, <span class="class">Integer</span><span class="keyword">></span> ages = <span class="keyword">new</span> <span class="class">HashMap</span>();
+
+<span class="comment">// Add key-value pairs</span>
+ages.<span class="method">put</span>(<span class="string">"Alice"</span>, <span class="number">25</span>);
+ages.<span class="method">put</span>(<span class="string">"Bob"</span>, <span class="number">30</span>);
+ages.<span class="method">put</span>(<span class="string">"Charlie"</span>, <span class="number">35</span>);
+
+<span class="comment">// Get a value by key</span>
+<span class="keyword">int</span> bobAge = ages.<span class="method">get</span>(<span class="string">"Bob"</span>);  <span class="comment">// 30</span>
+
+<span class="comment">// Check if key exists</span>
+<span class="keyword">boolean</span> hasAlice = ages.<span class="method">containsKey</span>(<span class="string">"Alice"</span>);
+
+<span class="comment">// Check if value exists</span>
+<span class="keyword">boolean</span> hasAge30 = ages.<span class="method">containsValue</span>(<span class="number">30</span>);
+
+<span class="comment">// Remove a pair</span>
+ages.<span class="method">remove</span>(<span class="string">"Bob"</span>);
+
+<span class="comment">// Get all keys or values</span>
+<span class="class">Set</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> keys = ages.<span class="method">keySet</span>();
+<span class="class">Collection</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> values = ages.<span class="method">values</span>();
+
+<span class="comment">// Loop through all entries</span>
+<span class="keyword">for</span> (<span class="class">String</span> name : ages.<span class="method">keySet</span>()) {
+    System.out.println(name + <span class="string">": "</span> + ages.<span class="method">get</span>(name));
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3.4 HashSet</h3>
+                
+                <h4>What is HashSet?</h4>
+                <p>HashSet is a collection that stores unique elements only - no duplicates allowed. It's like a mathematical set.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.util.HashSet;
+
+<span class="class">HashSet</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> languages = <span class="keyword">new</span> <span class="class">HashSet</span>();
+
+<span class="comment">// Add elements (duplicates are ignored)</span>
+languages.<span class="method">add</span>(<span class="string">"Java"</span>);
+languages.<span class="method">add</span>(<span class="string">"Python"</span>);
+languages.<span class="method">add</span>(<span class="string">"Java"</span>);  <span class="comment">// Won't be added - already exists!</span>
+languages.<span class="method">add</span>(<span class="string">"C++"</span>);
+
+System.out.println(languages.size());  <span class="comment">// 3 (not 4!)</span>
+
+<span class="comment">// Check membership</span>
+<span class="keyword">boolean</span> hasJava = languages.<span class="method">contains</span>(<span class="string">"Java"</span>);
+
+<span class="comment">// Remove element</span>
+languages.<span class="method">remove</span>(<span class="string">"Python"</span>);
+
+<span class="comment">// Iterate</span>
+<span class="keyword">for</span> (<span class="class">String</span> lang : languages) {
+    System.out.println(lang);
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: Algorithms -->
+        <div id="module4" class="lesson-section">
+            <h2>📖 Module 4: Algorithms <span class="badge">Intermediate</span></h2>
+            <p>Algorithms are step-by-step procedures for solving problems. Understanding algorithm complexity helps you choose the right approach for your data.</p>
+
+            <div class="concept">
+                <h3>4.1 Time Complexity & Big O Notation</h3>
+                
+                <h4>What is Big O?</h4>
+                <p>Big O notation describes how the runtime of an algorithm grows as the input size increases. It gives us an upper bound on the worst-case scenario.</p>
+
+                <h4>Common Time Complexities</h4>
+                <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                    <tr style="background: rgba(255,255,255,0.1);">
+                        <th style="padding: 10px; text-align: left;">Notation</th>
+                        <th style="padding: 10px; text-align: left;">Name</th>
+                        <th style="padding: 10px; text-align: left;">Example</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">O(1)</td>
+                        <td style="padding: 10px;">Constant</td>
+                        <td style="padding: 10px;">Array access by index</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 10px;">O(log n)</td>
+                        <td style="padding: 10px;">Logarithmic</td>
+                        <td style="padding: 10px;">Binary search</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">O(n)</td>
+                        <td style="padding: 10px;">Linear</td>
+                        <td style="padding: 10px;">Simple loop</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 10px;">O(n log n)</td>
+                        <td style="padding: 10px;">Linearithmic</td>
+                        <td style="padding: 10px;">Merge sort</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">O(n²)</td>
+                        <td style="padding: 10px;">Quadratic</td>
+                        <td style="padding: 10px;">Nested loops</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 10px;">O(2ⁿ)</td>
+                        <td style="padding: 10px;">Exponential</td>
+                        <td style="padding: 10px;">Recursive fibonacci</td>
+                    </tr>
+                </table>
+
+                <div class="example-box">
+                    <h4>Examples of Each Complexity</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// O(1) - Constant time</span>
+<span class="keyword">int</span> first = array[<span class="number">0</span>];  <span class="comment">// Always one operation</span>
+
+<span class="comment">// O(n) - Linear time</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < n; i++) { print(arr[i]); }
+
+<span class="comment">// O(n²) - Quadratic time</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < n; i++) {
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j < n; j++) { print(arr[i][j]); }
+}
+
+<span class="comment">// O(log n) - Logarithmic time</span>
+<span class="comment">// Binary search halves the search space each step</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Goal</h4>
+                    <p>Always aim for the lowest time complexity you can achieve. However, sometimes a simpler O(n²) algorithm is better if it's easier to maintain and n is small.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4.2 Searching Algorithms</h3>
+                
+                <h4>Linear Search</h4>
+                <p>Simple but inefficient - check each element one by one.</p>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(n)</li>
+                    <li><strong>Best For:</strong> Unsorted arrays, small datasets</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">public static int</span> <span class="method">linearSearch</span>(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target) {
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < arr.length; i++) {
+        <span class="keyword">if</span> (arr[i] == target) {
+            <span class="keyword">return</span> i;  <span class="comment">// Found! Return index</span>
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">// Not found</span>
+}</code></pre>
+                </div>
+
+                <h4>Binary Search</h4>
+                <p>Efficient but requires sorted array. Repeatedly divide the search space in half.</p>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(log n)</li>
+                    <li><strong>Best For:</strong> Large sorted datasets</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Binary search - array must be sorted!</span>
+<span class="keyword">public static int</span> <span class="method">binarySearch</span>(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target) {
+    <span class="keyword">int</span> left = <span class="number">0</span>;
+    <span class="keyword">int</span> right = arr.length - <span class="number">1</span>;
+    
+    <span class="keyword">while</span> (left <= right) {
+        <span class="comment">// Prevent overflow for large arrays</span>
+        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;
+        
+        <span class="keyword">if</span> (arr[mid] == target) {
+            <span class="keyword">return</span> mid;
+        } <span class="keyword">else if</span> (arr[mid] < target) {
+            left = mid + <span class="number">1</span>;  <span class="comment">// Search right half</span>
+        } <span class="keyword">else</span> {
+            right = mid - <span class="number">1</span>;  <span class="comment">// Search left half</span>
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4>💡 Important</h4>
+                    <p>Binary search requires a SORTED array. If your data isn't sorted, you'll need to sort it first (cost: O(n log n)) or use linear search.</p>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4.3 Sorting Algorithms</h3>
+                
+                <h4>Bubble Sort</h4>
+                <p>Simple but inefficient - repeatedly swap adjacent elements if in wrong order.</p>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(n²)</li>
+                    <li><strong>Space Complexity:</strong> O(1)</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">public static void</span> <span class="method">bubbleSort</span>(<span class="keyword">int</span>[] arr) {
+    <span class="keyword">int</span> n = arr.length;
+    
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < n - <span class="number">1</span>; i++) {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j < n - i - <span class="number">1</span>; j++) {
+            <span class="keyword">if</span> (arr[j] > arr[j + <span class="number">1</span>]) {
+                <span class="comment">// Swap</span>
+                <span class="keyword">int</span> temp = arr[j];
+                arr[j] = arr[j + <span class="number">1</span>];
+                arr[j + <span class="number">1</span>] = temp;
+            }
+        }
+    }
+}</code></pre>
+                </div>
+
+                <h4>Merge Sort</h4>
+                <p>Divide and conquer - split in half, sort each half, merge back together.</p>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(n log n)</li>
+                    <li><strong>Space Complexity:</strong> O(n)</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="keyword">public static void</span> <span class="method">mergeSort</span>(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right) {
+    <span class="keyword">if</span> (left < right) {
+        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;
+        
+        <span class="method">mergeSort</span>(arr, left, mid);      <span class="comment">// Sort left half</span>
+        <span class="method">mergeSort</span>(arr, mid + <span class="number">1</span>, right); <span class="comment">// Sort right half</span>
+        <span class="method">merge</span>(arr, left, mid, right);  <span class="comment">// Merge sorted halves</span>
+    }
+}
+
+<span class="comment">// Java's built-in sorting is even better!</span>
+<span class="class">Arrays</span>.<span class="method">sort</span>(array);  <span class="comment">// Uses Dual-Pivot Quicksort - O(n log n)</span>
+<span class="class">Arrays</span>.<span class="method">sort</span>(array, Collections.reverseOrder());  <span class="comment">// Descending order</span></code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Use Built-in Methods</h4>
+                    <p>For most practical purposes, use Java's built-in <code>Arrays.sort()</code>. It's optimized and well-tested. Only implement your own sorting when learning or for specific requirements.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 5: Exception Handling -->
+        <div id="module5" class="lesson-section">
+            <h2>📖 Module 5: Exception Handling <span class="badge">Intermediate</span></h2>
+            <p>Exceptions are events that disrupt the normal flow of program execution. Proper handling makes your code more robust and user-friendly.</p>
+
+            <div class="concept">
+                <h3>5.1 Understanding Exceptions</h3>
+                
+                <h4>What is an Exception?</h4>
+                <p>An exception is an event that occurs during program execution that disrupts the normal flow of instructions. It can be caused by various things: invalid input, file not found, network errors, etc.</p>
+
+                <h4>Exception Hierarchy</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Throwable is the root
+//   ├── Error (serious problems, shouldn't catch)
+//   │     └── OutOfMemoryError, StackOverflowError
+//   └── Exception (can and should handle)
+//         ├── RuntimeException (unchecked - can occur anywhere)
+//         │     ├── NullPointerException
+//         │     ├── ArrayIndexOutOfBoundsException
+//         │     ├── ArithmeticException
+//         │     └── IllegalArgumentException
+//         └── IOException, SQLException, etc. (checked)</span></code></pre>
+                </div>
+
+                <h4>Checked vs Unchecked</h4>
+                <ul>
+                    <li><strong>Checked Exceptions</strong> - Compiler forces you to handle or declare them (e.g., IOException)</li>
+                    <li><strong>Unchecked Exceptions</strong> - Occur at runtime, not forced to handle (e.g., NullPointerException)</li>
+                </ul>
+            </div>
+
+            <div class="concept">
+                <h3>5.2 Try-Catch Blocks</h3>
+                
+                <h4>Basic Structure</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">try</span> {
+    <span class="comment">// Code that might throw an exception</span>
+    <span class="class">String</span> str = <span class="keyword">null</span>;
+    System.out.println(str.length());  <span class="comment">// NullPointerException!</span>
+    
+} <span class="keyword">catch</span> (<span class="class">NullPointerException</span> e) {
+    <span class="comment">// Handle the exception</span>
+    System.out.println(<span class="string">"Error: String is null!"</span>);
+    e.printStackTrace();  <span class="comment">// Print the stack trace for debugging</span>
+    
+} <span class="keyword">catch</span> (<span class="class">Exception</span> e) {
+    <span class="comment">// Catch any other exception (general handler)</span>
+    System.out.println(<span class="string">"Something went wrong: "</span> + e.getMessage());
+    
+} <span class="keyword">finally</span> {
+    <span class="comment">// This ALWAYS runs, with or without exception</span>
+    System.out.println(<span class="string">"Cleanup code here"</span>);
+}</code></pre>
+                </div>
+
+                <h4>Catching Multiple Exceptions</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Java 7+ - Multi-catch</span>
+<span class="keyword">try</span> {
+    <span class="comment">// Risky code</span>
+    
+} <span class="keyword">catch</span> (<span class="class">IOException</span> | <span class="class">SQLException</span> e) {
+    <span class="comment">// Handle either type the same way</span>
+    System.out.println(<span class="string">"Database or IO error: "</span> + e.getMessage());
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5.3 Throwing Exceptions</h3>
+                
+                <h4>The throw Keyword</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">public void</span> <span class="method">setAge</span>(<span class="keyword">int</span> age) {
+    <span class="keyword">if</span> (age < <span class="number">0</span> || age > <span class="number">150</span>) {
+        <span class="comment">// Throw an exception to indicate invalid input</span>
+        <span class="keyword">throw new</span> <span class="class">IllegalArgumentException</span>(
+            <span class="string">"Age must be between 0 and 150"</span>
+        );
+    }
+    <span class="keyword">this</span>.age = age;
+}</code></pre>
+                </div>
+
+                <h4>The throws Keyword</h4>
+                <p>Used in method signature to declare that the method might throw checked exceptions.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Declaring that this method might throw checked exceptions</span>
+<span class="keyword">public void</span> <span class="method">readFile</span>(<span class="class">String</span> filename) <span class="keyword">throws</span> <span class="class">IOException</span>, <span class="class">FileNotFoundException</span> {
+    <span class="comment">// Must handle or declare these checked exceptions</span>
+    <span class="class">FileReader</span> reader = <span class="keyword">new</span> <span class="class">FileReader</span>(filename);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5.4 Custom Exceptions</h3>
+                
+                <h4>Creating Your Own Exception</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Custom checked exception</span>
+<span class="keyword">public class</span> <span class="class">InsufficientFundsException</span> <span class="keyword">extends</span> <span class="class">Exception</span> {
+    <span class="keyword">public</span> <span class="method">InsufficientFundsException</span>(<span class="class">String</span> message) {
+        <span class="keyword">super</span>(message);
+    }
+}
+
+<span class="comment">// Custom unchecked exception</span>
+<span class="keyword">public class</span> <span class="class">InvalidEmailException</span> <span class="keyword">extends</span> <span class="class">RuntimeException</span> {
+    <span class="keyword">public</span> <span class="method">InvalidEmailException</span>(<span class="class">String</span> message) {
+        <span class="keyword">super</span>(message);
+    }
+}
+
+<span class="comment">// Using custom exception</span>
+<span class="keyword">public void</span> <span class="method">withdraw</span>(<span class="keyword">double</span> amount) <span class="keyword">throws</span> <span class="class">InsufficientFundsException</span> {
+    <span class="keyword">if</span> (amount > balance) {
+        <span class="keyword">throw new</span> <span class="class">InsufficientFundsException</span>(
+            <span class="string">"Insufficient funds. Available: $"</span> + balance
+        );
+    }
+    balance -= amount;
+}</code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Best Practices</h4>
+                    <ul>
+                        <li>Don't catch exceptions just to suppress them</li>
+                        <li>Provide meaningful error messages</li>
+                        <li>Clean up resources in finally block or use try-with-resources</li>
+                        <li>Log exceptions for debugging, show user-friendly messages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 6: File I/O -->
+        <div id="module6" class="lesson-section">
+            <h2>📖 Module 6: File Input/Output <span class="badge">Intermediate</span></h2>
+            <p>File I/O allows your Java programs to read from and write to files on disk. Essential for data persistence and processing external data.</p>
+
+            <div class="concept">
+                <h3>6.1 Reading Files</h3>
+                
+                <h4>Using Scanner</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.io.File;
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="class">File</span> file = <span class="keyword">new</span> <span class="class">File</span>(<span class="string">"data.txt"</span>);
+<span class="class">Scanner</span> scanner = <span class="keyword">new</span> <span class="class">Scanner</span>(file);
+
+<span class="keyword">while</span> (scanner.<span class="method">hasNextLine</span>()) {
+    <span class="class">String</span> line = scanner.<span class="method">nextLine</span>();
+    System.out.println(line);
+}
+
+scanner.<span class="method">close</span>();</code></pre>
+                </div>
+
+                <h4>Using BufferedReader</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.io.BufferedReader;
+<span class="keyword">import</span> java.io.FileReader;
+
+<span class="class">BufferedReader</span> reader = <span class="keyword">new</span> <span class="class">BufferedReader</span>(
+    <span class="keyword">new</span> <span class="class">FileReader</span>(<span class="string">"data.txt"</span>)
+);
+
+<span class="class">String</span> line;
+<span class="keyword">while</span> ((line = reader.<span class="method">readLine</span>()) != <span class="keyword">null</span>) {
+    System.out.println(line);
+}
+
+reader.<span class="method">close</span>();</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6.2 Writing Files</h3>
+                
+                <h4>Using PrintWriter</h4>
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> java.io.PrintWriter;
+
+<span class="class">PrintWriter</span> writer = <span class="keyword">new</span> <span class="class">PrintWriter</span>(<span class="string">"output.txt"</span>);
+
+writer.<span class="method">println</span>(<span class="string">"Hello, World!"</span>);
+writer.<span class="method">println</span>(<span class="string">"Second line"</span>);
+writer.<span class="method">printf</span>(<span class="string">"Value: %.2f%n"</span>, <span class="number">3.14159</span>);
+
+writer.<span class="method">close</span>();</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6.3 Try-With-Resources</h3>
+                
+                <p>Automatically closes resources when done - even if exceptions occur.</p>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Try-with-resources - automatically closes files</span>
+<span class="keyword">try</span> (<span class="class">BufferedReader</span> reader = <span class="keyword">new</span> <span class="class">BufferedReader</span>(
+        <span class="keyword">new</span> <span class="class">FileReader</span>(<span class="string">"input.txt"</span>));
+     <span class="class">PrintWriter</span> writer = <span class="keyword">new</span> <span class="class">PrintWriter</span>(<span class="string">"output.txt"</span>)) {
+    
+    <span class="class">String</span> line;
+    <span class="keyword">while</span> ((line = reader.<span class="method">readLine</span>()) != <span class="keyword">null</span>) {
+        writer.<span class="method">println</span>(line.<span class="method">toUpperCase</span>());
+    }
+    
+} <span class="keyword">catch</span> (<span class="class">IOException</span> e) {
+    e.printStackTrace();
+}
+<span class="comment">// Files are automatically closed here!</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 7: Generics -->
+        <div id="module7" class="lesson-section">
+            <h2>📖 Module 7: Generics <span class="badge">Advanced</span></h2>
+            <p>Generics enable you to write reusable, type-safe code. They allow classes, interfaces, and methods to operate on types that are specified by the user.</p>
+
+            <div class="concept">
+                <h3>7.1 Generic Classes</h3>
+                
+                <h4>Why Use Generics?</h4>
+                <ul>
+                    <li><strong>Type Safety</strong> - Catch type errors at compile time</li>
+                    <li><strong>Reusability</strong> - One class works with multiple types</li>
+                    <li><strong>No Casts</strong> - No need to cast objects when retrieving</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code><span class="comment">// Generic class with type parameter T</span>
+<span class="keyword">public class</span> <span class="class">Box</span><span class="keyword"><</span>T<span class="keyword">></span> {
+    <span class="keyword">private</span> T content;
+    
+    <span class="keyword">public</span> <span class="method">Box</span>(T content) {
+        <span class="keyword">this</span>.content = content;
+    }
+    
+    <span class="keyword">public</span> T <span class="method">getContent</span>() {
+        <span class="keyword">return</span> content;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">setContent</span>(T content) {
+        <span class="keyword">this</span>.content = content;
+    }
+}
+
+<span class="comment">// Using the generic class</span>
+<span class="class">Box</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> stringBox = <span class="keyword">new</span> <span class="class">Box</span><>(<span class="string">"Hello"</span>);
+<span class="class">String</span> str = stringBox.<span class="method">getContent</span>();  <span class="comment">// No cast needed!</span>
+
+<span class="class">Box</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> intBox = <span class="keyword">new</span> <span class="class">Box</span>(<span class="number">42</span>);
+<span class="class">Integer</span> num = intBox.<span class="method">getContent</span>();</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>7.2 Generic Methods</h3>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Generic method works with any type</span>
+<span class="keyword">public static</span> <span class="keyword"><</span>T<span class="keyword">></span> T <span class="method">first</span>(<span class="class">List</span><span class="keyword"><</span>T<span class="keyword">></span> list) {
+    <span class="keyword">if</span> (list.isEmpty()) {
+        <span class="keyword">return null</span>;
+    }
+    <span class="keyword">return</span> list.get(<span class="number">0</span>);
+}
+
+<span class="comment">// Type inference - Java figures out the type</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> names = <span class="class">Arrays</span>.<span class="method">asList</span>(<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>);
+<span class="class">String</span> first = <span class="method">first</span>(names);  <span class="comment">// Returns "A"</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 8: Lambdas & Streams -->
+        <div id="module8" class="lesson-section">
+            <h2>📖 Module 8: Lambda Expressions & Streams <span class="badge">Advanced</span></h2>
+            <p>Lambda expressions and streams bring functional programming to Java. They enable concise, declarative code for data processing.</p>
+
+            <div class="concept">
+                <h3>8.1 Lambda Expressions</h3>
+                
+                <h4>What is a Lambda?</h4>
+                <p>A lambda is an anonymous function (a function without a name) that can be passed around as a value. Perfect for short, one-time operations.</p>
+
+                <h4>Basic Syntax</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Full syntax with parameter types</span>
+(<span class="class">String</span> s) -> s.length()
+
+<span class="comment">// Type inference - no parameter type needed</span>
+(s) -> s.length()
+
+<span class="comment">// Single parameter - parentheses optional</span>
+s -> s.length()
+
+<span class="comment">// Multiple statements</span>
+s -> {
+    System.out.println(<span class="string">"Processing: "</span> + s);
+    <span class="keyword">return</span> s.length();
+}
+
+<span class="comment">// No parameters</span>
+() -> System.out.println(<span class="string">"Hello!"</span>)
+
+<span class="comment">// Multiple parameters</span>
+(a, b) -> a + b</code></pre>
+                </div>
+
+                <h4>Using Lambdas with Functional Interfaces</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Runnable - no parameters, no return</span>
+<span class="class">Runnable</span> task = () -> System.out.println(<span class="string">"Task running"</span>);
+<span class="keyword">new</span> <span class="class">Thread</span>(task).<span class="method">start</span>();
+
+<span class="comment">// Comparator - for sorting</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> names = <span class="class">Arrays</span>.<span class="method">asList</span>(<span class="string">"Charlie"</span>, <span class="string">"Alice"</span>, <span class="string">"Bob"</span>);
+names.<span class="method">sort</span>((a, b) -> a.<span class="method">compareTo</span>(b));</code></pre>
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>8.2 Stream API</h3>
+                
+                <h4>What is a Stream?</h4>
+                <p>A stream is a sequence of elements that can be processed in a functional style. It doesn't store data - it processes data from collections on-the-fly.</p>
+
+                <h4>Common Stream Operations</h4>
+                <div class="code-block">
+                    <pre><code><span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> numbers = <span class="class">Arrays</span>.<span class="method">asList</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);
+
+<span class="comment">// Filter - keep only even numbers</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> evens = numbers.<span class="method">stream</span>()
+    .<span class="method">filter</span>(n -> n % <span class="number">2</span> == <span class="number">0</span>)
+    .<span class="method">toList</span>();  <span class="comment">// [2, 4, 6, 8, 10]
+
+<span class="comment">// Map - transform each element</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> squares = numbers.<span class="method">stream</span>()
+    .<span class="method">map</span>(n -> n * n)
+    .<span class="method">toList</span>();  <span class="comment">// [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+<span class="comment">// Reduce - combine all elements into one</span>
+<span class="keyword">int</span> sum = numbers.<span class="method">stream</span>()
+    .<span class="method">reduce</span>(<span class="number">0</span>, (a, b) -> a + b);  <span class="comment">// 55
+
+<span class="comment">// Chaining operations</span>
+<span class="keyword">int</span> result = numbers.<span class="method">stream</span>()
+    .<span class="method">filter</span>(n -> n > <span class="number">5</span>)      <span class="comment">// [6, 7, 8, 9, 10]</span>
+    .<span class="method">map</span>(n -> n * <span class="number">2</span>)         <span class="comment">// [12, 14, 16, 18, 20]</span>
+    .<span class="method">reduce</span>(<span class="number">0</span>, (a, b) -> a + b);  <span class="comment">// 80</span></code></pre>
+                </div>
+
+                <h4>Other Useful Operations</h4>
+                <div class="code-block">
+                    <pre><code><span class="comment">// forEach - do something with each element</span>
+names.<span class="method">stream</span>()
+    .<span class="method">forEach</span>(name -> System.out.println(<span class="string">"Hello, "</span> + name));
+
+<span class="comment">// distinct - remove duplicates</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> unique = numbers.<span class="method">stream</span>()
+    .<span class="method">distinct</span>()
+    .<span class="method">toList</span>();
+
+<span class="comment">// limit and skip</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> first3 = numbers.<span class="method">stream</span>()
+    .<span class="method">limit</span>(<span class="number">3</span>)
+    .<span class="method">toList</span>();  <span class="comment">// [1, 2, 3]
+
+<span class="comment">// skip and limit combined</span>
+<span class="class">List</span><span class="keyword"><</span><span class="class">Integer</span><span class="keyword">></span> middle = numbers.<span class="method">stream</span>()
+    .<span class="method">skip</span>(<span class="number">2</span>)
+    .<span class="method">limit</span>(<span class="number">3</span>)
+    .<span class="method">toList</span>();  <span class="comment">// [3, 4, 5]</span></code></pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Remember</h4>
+                    <p>Streams are lazy - they don't execute until a terminal operation (like collect(), forEach(), reduce()) is called. Intermediate operations (filter, map) just set up the pipeline.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 JavaMastery. All rights reserved. Happy Coding! ☕</p>
+    </footer>
+
+    <a href="#" class="back-to-top" title="Back to top">↑</a>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + '%';
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
