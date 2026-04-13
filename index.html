@@ -451,6 +451,165 @@
             display: none;
         }
 
+        .module-content.expanded {
+            display: block;
+        }
+
+        .module-content .lesson {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-content .lesson h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .module-content .lesson p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .module-content .lesson code {
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .module-content .lesson pre {
+            background: #0d0d1a;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid rgba(248, 152, 28, 0.2);
+        }
+
+        .module-content .lesson pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .ide-container {
+            background: #0d0d1a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+            border: 1px solid rgba(248, 152, 28, 0.3);
+        }
+
+        .ide-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ide-header span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .ide-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ide-btn {
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .ide-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .ide-btn.run {
+            background: var(--success);
+        }
+
+        .ide-editor {
+            width: 100%;
+            min-height: 150px;
+            background: #0d0d1a;
+            color: #abb2bf;
+            border: none;
+            padding: 1rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .ide-editor:focus {
+            outline: none;
+        }
+
+        .ide-output {
+            background: #0a0a12;
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 80px;
+        }
+
+        .ide-output-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ide-output-content {
+            color: var(--success);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+
+        .exercise-box {
+            background: rgba(248, 152, 28, 0.1);
+            border: 1px solid rgba(248, 152, 28, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .exercise-box h5 {
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         .module-content ul {
             list-style: none;
             display: grid;
@@ -810,13 +969,140 @@
                     <span class="module-toggle">▼</span>
                 </div>
                 <div class="module-content">
-                    <ul>
-                        <li>Setting up your development environment</li>
-                        <li>Variables, data types, and operators</li>
-                        <li>Control flow statements (if/else, loops)</li>
-                        <li>Methods and scope</li>
-                        <li>Object-oriented programming basics</li>
-                    </ul>
+                    <div class="lesson">
+                        <h4>📚 Variables and Data Types</h4>
+                        <p>In Java, every variable has a specific type that determines its size and layout in memory. Java has two categories of data types: <strong>primitive types</strong> (int, double, boolean, etc.) and <strong>reference types</strong> (objects, arrays, strings).</p>
+                        <pre><code><span class="comment">// Primitive data types</span>
+<span class="keyword">int</span> age = <span class="annotation">25</span>;
+<span class="keyword">double</span> price = <span class="annotation">19.99</span>;
+<span class="keyword">boolean</span> isActive = <span class="keyword">true</span>;
+<span class="keyword">char</span> grade = <span class="string">'A'</span>;
+
+<span class="comment">// Reference types</span>
+<span class="class">String</span> name = <span class="string">"JavaMastery"</span>;
+<span class="class">Integer</span> wrappedAge = <span class="keyword">new</span> <span class="class">Integer</span>(age);</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 1.1: Declare Variables</h5>
+                            <p>Create variables to store your name, age, and whether you are a student. Use appropriate data types.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 1.1</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class Exercise {
+    public static void main(String[] args) {
+        // Declare your variables below:
+        
+        // Print your information
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Is Student: " + isStudent);
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🔄 Control Flow Statements</h4>
+                        <p>Control flow statements allow you to control the execution order of your program. Java supports <code>if-else</code>, <code>switch</code>, and loop constructs (<code>for</code>, <code>while</code>, <code>do-while</code>).</p>
+                        <pre><code><span class="comment">// If-else statement</span>
+<span class="keyword">int</span> score = <span class="annotation">85</span>;
+<span class="keyword">if</span> (score >= <span class="annotation">90</span>) {
+    System.out.println(<span class="string">"Grade: A"</span>);
+} <span class="keyword">else if</span> (score >= <span class="annotation">80</span>) {
+    System.out.println(<span class="string">"Grade: B"</span>);
+} <span class="keyword">else</span> {
+    System.out.println(<span class="string">"Grade: C"</span>);
+}
+
+<span class="comment">// For loop</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="annotation">0</span>; i < <span class="annotation">5</span>; i++) {
+    System.out.println(<span class="string">"Count: "</span> + i);
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 1.2: FizzBuzz</h5>
+                            <p>Write a program that prints numbers 1-20. For multiples of 3, print "Fizz". For multiples of 5, print "Buzz". For multiples of both, print "FizzBuzz".</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 1.2</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class FizzBuzz {
+    public static void main(String[] args) {
+        // Write your FizzBuzz program here
+        
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>📦 Methods and Scope</h4>
+                        <p>Methods are blocks of code that perform specific tasks. They help organize code and promote reusability. Understanding scope is crucial - variables declared in a method are local to that method.</p>
+                        <pre><code><span class="comment">// Method with parameters and return type</span>
+<span class="keyword">public static int</span> <span class="method">calculateSum</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+    <span class="keyword">int</span> sum = a + b;
+    <span class="keyword">return</span> sum;
+}
+
+<span class="comment">// Method overloading</span>
+<span class="keyword">public static int</span> <span class="method">calculateSum</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) {
+    <span class="keyword">return</span> a + b + c;
+}
+
+<span class="comment">// Main method</span>
+<span class="keyword">public static void</span> <span class="method">main</span>(<span class="class">String</span>[] args) {
+    <span class="keyword">int</span> result = <span class="method">calculateSum</span>(<span class="annotation">5</span>, <span class="annotation">3</span>);
+    System.out.println(<span class="string">"Sum: "</span> + result);
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 1.3: Create a Calculator</h5>
+                            <p>Create methods for add, subtract, multiply, and divide. Test each operation.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 1.3</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class Calculator {
+    
+    // Add your methods here
+    
+    public static void main(String[] args) {
+        // Test your calculator
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -826,13 +1112,199 @@
                     <span class="module-toggle">▼</span>
                 </div>
                 <div class="module-content">
-                    <ul>
-                        <li>Classes and objects</li>
-                        <li>Inheritance and polymorphism</li>
-                        <li>Interfaces and abstract classes</li>
-                        <li>Encapsulation and best practices</li>
-                        <li>Design patterns introduction</li>
-                    </ul>
+                    <div class="lesson">
+                        <h4>🏗️ Classes and Objects</h4>
+                        <p>A <strong>class</strong> is a blueprint for creating objects. An <strong>object</strong> is an instance of a class. Classes contain fields (attributes) and methods (behaviors).</p>
+                        <pre><code><span class="comment">// Defining a class</span>
+<span class="keyword">public class</span> <span class="class">Car</span> {
+    <span class="comment">// Fields (attributes)</span>
+    <span class="keyword">private</span> <span class="class">String</span> brand;
+    <span class="keyword">private</span> <span class="class">String</span> model;
+    <span class="keyword">private int</span> year;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> <span class="method">Car</span>(<span class="class">String</span> brand, <span class="class">String</span> model, <span class="keyword">int</span> year) {
+        <span class="keyword">this</span>.brand = brand;
+        <span class="keyword">this</span>.model = model;
+        <span class="keyword">this</span>.year = year;
+    }
+    
+    <span class="comment">// Method</span>
+    <span class="keyword">public void</span> <span class="method">start</span>() {
+        System.out.println(<span class="string">"The "</span> + brand + <span class="string">" "</span> + model + <span class="string">" is starting!"</span>);
+    }
+}
+
+<span class="comment">// Creating objects</span>
+<span class="class">Car</span> myCar = <span class="keyword">new</span> <span class="class">Car</span>(<span class="string">"Tesla"</span>, <span class="string">"Model 3"</span>, <span class="annotation">2024</span>);
+myCar.<span class="method">start</span>();</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 2.1: Create a Bank Account</h5>
+                            <p>Create a BankAccount class with fields for account number, balance, and holder name. Add methods to deposit and withdraw money.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 2.1</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class BankAccount {
+    // Add fields here
+    
+    // Add constructor
+    
+    // Add deposit method
+    
+    // Add withdraw method
+    
+    public static void main(String[] args) {
+        // Test your BankAccount
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🔄 Inheritance and Polymorphism</h4>
+                        <p><strong>Inheritance</strong> allows a class to inherit properties and methods from another class. <strong>Polymorphism</strong> allows objects to take on many forms - a subclass can be treated as its parent class.</p>
+                        <pre><code><span class="comment">// Parent class</span>
+<span class="keyword">public class</span> <span class="class">Animal</span> {
+    <span class="keyword">public void</span> <span class="method">makeSound</span>() {
+        System.out.println(<span class="string">"Some sound"</span>);
+    }
+}
+
+<span class="comment">// Child class</span>
+<span class="keyword">public class</span> <span class="class">Dog</span> <span class="keyword">extends</span> <span class="class">Animal</span> {
+    @Override
+    <span class="keyword">public void</span> <span class="method">makeSound</span>() {
+        System.out.println(<span class="string">"Woof! Woof!"</span>);
+    }
+}
+
+<span class="comment">// Polymorphism in action</span>
+<span class="class">Animal</span> myPet = <span class="keyword">new</span> <span class="class">Dog</span>();
+myPet.<span class="method">makeSound</span>(); <span class="comment">// Outputs: Woof! Woof!</span></code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 2.2: Shape Hierarchy</h5>
+                            <p>Create a Shape base class, then extend it with Circle and Rectangle. Override the area() method in each subclass.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 2.2</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class Shape {
+    // Add area method
+    
+}
+
+class Circle extends Shape {
+    double radius;
+    // Implement area for circle
+    
+}
+
+class Rectangle extends Shape {
+    double width, height;
+    // Implement area for rectangle
+    
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Test your shapes
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🔐 Encapsulation and Interfaces</h4>
+                        <p><strong>Encapsulation</strong> bundles data and methods that operate on that data within a class, restricting direct access to some components. <strong>Interfaces</strong> define contracts that classes can implement.</p>
+                        <pre><code><span class="comment">// Encapsulation with private fields and public getters/setters</span>
+<span class="keyword">public class</span> <span class="class">BankAccount</span> {
+    <span class="keyword">private double</span> balance; <span class="comment">// Encapsulated field</span>
+    
+    <span class="keyword">public double</span> <span class="method">getBalance</span>() {
+        <span class="keyword">return</span> balance;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">setBalance</span>(<span class="keyword">double</span> balance) {
+        <span class="keyword">if</span> (balance >= <span class="annotation">0</span>) {
+            <span class="keyword">this</span>.balance = balance;
+        }
+    }
+}
+
+<span class="comment">// Interface definition</span>
+<span class="keyword">public interface</span> <span class="class">Drawable</span> {
+    <span class="keyword">void</span> <span class="method">draw</span>();
+}
+
+<span class="comment">// Implementing an interface</span>
+<span class="keyword">public class</span> <span class="class">Circle</span> <span class="keyword">implements</span> <span class="class">Drawable</span> {
+    @Override
+    <span class="keyword">public void</span> <span class="method">draw</span>() {
+        System.out.println(<span class="string">"Drawing a circle"</span>);
+    }
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 2.3: Interface Implementation</h5>
+                            <p>Create an interface called "Playable" with a play() method. Implement it in VideoGame and MusicPlayer classes.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 2.3</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">interface Playable {
+    // Add play method
+}
+
+class VideoGame implements Playable {
+    // Implement play
+    
+}
+
+class MusicPlayer implements Playable {
+    // Implement play
+    
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Test your implementations
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -842,13 +1314,169 @@
                     <span class="module-toggle">▼</span>
                 </div>
                 <div class="module-content">
-                    <ul>
-                        <li>Arrays and collections</li>
-                        <li>Linked lists, stacks, and queues</li>
-                        <li>Trees and graphs</li>
-                        <li>Sorting and searching algorithms</li>
-                        <li>Time and space complexity</li>
-                    </ul>
+                    <div class="lesson">
+                        <h4>📊 Arrays and Collections</h4>
+                        <p>Java provides powerful collection frameworks. <strong>Arrays</strong> are fixed-size, while <strong>ArrayList</strong>, <strong>HashMap</strong>, and <strong>HashSet</strong> offer dynamic sizing and specialized operations.</p>
+                        <pre><code><span class="comment">// Working with Arrays</span>
+<span class="keyword">int</span>[] numbers = {<span class="annotation">1, 2, 3, 4, 5</span>};
+<span class="keyword">for</span> (<span class="keyword">int</span> num : numbers) {
+    System.out.println(num);
+}
+
+<span class="comment">// ArrayList - Dynamic array</span>
+<span class="class">ArrayList</span><span class="keyword"><</span><span class="class">String</span><span class="keyword">></span> names = <span class="keyword">new</span> <span class="class">ArrayList</span<>();
+names.<span class="method">add</span>(<span class="string">"Alice"</span>);
+names.<span class="method">add</span>(<span class="string">"Bob"</span>);
+
+<span class="comment">// HashMap - Key-value pairs</span>
+<span class="class">HashMap</span><span class="keyword"><</span><span class="class">String</span>, <span class="class">Integer</span><span class="keyword">></span> ages = <span class="keyword">new</span> <span class="class">HashMap</span<>();
+ages.<span class="method">put</span>(<span class="string">"Alice"</span>, <span class="annotation">25</span>);
+ages.<span class="method">put</span>(<span class="string">"Bob"</span>, <span class="annotation">30</span>);</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 3.1: Student Grade Manager</h5>
+                            <p>Create a program that uses a HashMap to store student names and their grades. Calculate the average grade.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 3.1</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">import java.util.*;
+
+public class GradeManager {
+    public static void main(String[] args) {
+        HashMap<String, Integer> grades = new HashMap<>();
+        
+        // Add students and grades
+        
+        // Calculate and print average
+        
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🔍 Searching and Sorting Algorithms</h4>
+                        <p>Understanding algorithms is crucial for efficient programming. <strong>Binary search</strong> finds elements in O(log n) time on sorted arrays. <strong>Merge sort</strong> and <strong>quick sort</strong> are efficient sorting algorithms.</p>
+                        <pre><code><span class="comment">// Binary Search</span>
+<span class="keyword">public static int</span> <span class="method">binarySearch</span>(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target) {
+    <span class="keyword">int</span> left = <span class="annotation">0</span>;
+    <span class="keyword">int</span> right = arr.length - <span class="annotation">1</span>;
+    
+    <span class="keyword">while</span> (left <= right) {
+        <span class="keyword">int</span> mid = left + (right - left) / <span class="annotation">2</span>;
+        
+        <span class="keyword">if</span> (arr[mid] == target) <span class="keyword">return</span> mid;
+        <span class="keyword">if</span> (arr[mid] < target) left = mid + <span class="annotation">1</span>;
+        <span class="keyword">else</span> right = mid - <span class="annotation">1</span>;
+    }
+    <span class="keyword">return</span> -<span class="annotation">1</span>;
+}
+
+<span class="comment">// Using Java's built-in sorting</span>
+<span class="class">Arrays</span>.<span class="method">sort</span>(numbers);
+<span class="class">Collections</span>.<span class="method">sort</span>(list);</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 3.2: Implement Linear Search</h5>
+                            <p>Write a linear search method that finds the index of a target value in an array. Handle the case when the value is not found.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 3.2</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">public class LinearSearch {
+    
+    // Implement linearSearch method
+    
+    public static void main(String[] args) {
+        int[] numbers = {5, 10, 15, 20, 25, 30};
+        int target = 20;
+        
+        // Search for target and print result
+        
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🌳 Trees and Graphs Basics</h4>
+                        <p><strong>Trees</strong> are hierarchical structures with nodes connected by edges. <strong>Graphs</strong> are more flexible structures where nodes can have multiple connections. Binary trees and binary search trees are commonly used in Java.</p>
+                        <pre><code><span class="comment">// Binary Tree Node</span>
+<span class="keyword">class</span> <span class="class">TreeNode</span> {
+    <span class="class">TreeNode</span> left, right;
+    <span class="keyword">int</span> value;
+    
+    <span class="class">TreeNode</span>(<span class="keyword">int</span> value) {
+        <span class="keyword">this</span>.value = value;
+    }
+}
+
+<span class="comment">// Insert into BST</span>
+<span class="keyword">public TreeNode</span> <span class="method">insert</span>(<span class="class">TreeNode</span> root, <span class="keyword">int</span> value) {
+    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return new</span> <span class="class">TreeNode</span>(value);
+    <span class="keyword">if</span> (value < root.value) 
+        root.left = <span class="method">insert</span>(root.left, value);
+    <span class="keyword">else</span> 
+        root.right = <span class="method">insert</span>(root.right, value);
+    <span class="keyword">return</span> root;
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 3.3: Build a Binary Search Tree</h5>
+                            <p>Create a BST by inserting values [50, 30, 70, 20, 40, 60, 80]. Then implement in-order traversal to print values in sorted order.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 3.3</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">class TreeNode {
+    TreeNode left, right;
+    int value;
+    TreeNode(int value) { this.value = value; }
+}
+
+// Add insert and inOrder methods
+
+public class BSTDemo {
+    public static void main(String[] args) {
+        // Build BST with: 50, 30, 70, 20, 40, 60, 80
+        
+        // Print in-order traversal
+        
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -858,13 +1486,199 @@
                     <span class="module-toggle">▼</span>
                 </div>
                 <div class="module-content">
-                    <ul>
-                        <li>Introduction to Spring Framework</li>
-                        <li>Building REST APIs with Spring Boot</li>
-                        <li>Database integration with JPA/Hibernate</li>
-                        <li>Authentication and security</li>
-                        <li>Testing with JUnit and Mockito</li>
-                    </ul>
+                    <div class="lesson">
+                        <h4>🌱 Introduction to Spring Framework</h4>
+                        <p>The <strong>Spring Framework</strong> provides comprehensive infrastructure support for building enterprise Java applications. It promotes loose coupling through <strong>Dependency Injection (DI)</strong> and <strong>Inversion of Control (IoC)</strong>.</p>
+                        <pre><code><span class="comment">// Spring Bean Configuration</span>
+<span class="annotation">@Component</span>
+<span class="keyword">public class</span> <span class="class">UserService</span> {
+    <span class="keyword">private</span> <span class="class">UserRepository</span> userRepository;
+    
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">public</span> <span class="method">UserService</span>(<span class="class">UserRepository</span> userRepository) {
+        <span class="keyword">this</span>.userRepository = userRepository;
+    }
+    
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">findUserById</span>(<span class="keyword">Long</span> id) {
+        <span class="keyword">return</span> userRepository.<span class="method">findById</span>(id);
+    }
+}
+
+<span class="comment">// Application.properties (Spring Boot)</span>
+<span class="comment"># Server configuration</span>
+server.port=<span class="annotation">8080</span>
+spring.application.name=javamastery</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 4.1: Create a Spring Service</h5>
+                            <p>Create a simple Spring Boot application with a GreetingService that returns greeting messages. Annotate it properly with @Service.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 4.1</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">import org.springframework.stereotype.Service;
+
+// Create GreetingService with @Service annotation
+
+// Add a method that returns a greeting
+
+@Service
+class GreetingService {
+    // Add your methods here
+}
+
+public class Application {
+    public static void main(String[] args) {
+        // Create Spring context and test
+        System.out.println("Spring Boot App");
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🌐 Building REST APIs with Spring Boot</h4>
+                        <p><strong>REST APIs</strong> are the backbone of modern web applications. Spring Boot makes it easy to create RESTful services using <code>@RestController</code>, <code>@GetMapping</code>, <code>@PostMapping</code>, and other annotations.</p>
+                        <pre><code><span class="annotation">@RestController</span>
+<span class="annotation">@RequestMapping</span>(<span class="string">"/api/users"</span>)
+<span class="keyword">public class</span> <span class="class">UserController</span> {
+    
+    <span class="annotation">@GetMapping</span>
+    <span class="keyword">public</span> <span class="class">List</span><span class="keyword"><</span><span class="class">User</span><span class="keyword">></span> <span class="method">getAllUsers</span>() {
+        <span class="keyword">return</span> userService.<span class="method">findAll</span>();
+    }
+    
+    <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">getUserById</span>(<span class="annotation">@PathVariable</span> <span class="keyword">Long</span> id) {
+        <span class="keyword">return</span> userService.<span class="method">findById</span>(id);
+    }
+    
+    <span class="annotation">@PostMapping</span>
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">createUser</span>(<span class="annotation">@RequestBody</span> <span class="class">User</span> user) {
+        <span class="keyword">return</span> userService.<span class="method">save</span>(user);
+    }
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 4.2: Create a Product REST API</h5>
+                            <p>Create a REST controller for Products with endpoints to get all products, get product by ID, and create a new product.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 4.2</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">import org.springframework.web.bind.annotation.*;
+
+// Product model (simplified)
+class Product {
+    Long id;
+    String name;
+    double price;
+    
+    // Add getters and setters
+}
+
+// Create ProductController with @RestController
+
+@RestController
+@RequestMapping("/api/products")
+class ProductController {
+    
+    // Implement: GET /api/products
+    // Implement: GET /api/products/{id}
+    // Implement: POST /api/products
+    
+}
+
+public class ApiDemo {
+    public static void main(String[] args) {
+        System.out.println("REST API Demo");
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson">
+                        <h4>🗄️ Database Integration with JPA/Hibernate</h4>
+                        <p><strong>JPA</strong> (Java Persistence API) and <strong>Hibernate</strong> provide object-relational mapping (ORM) capabilities. They allow you to work with databases using Java objects instead of SQL.</p>
+                        <pre><code><span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"users"</span>)
+<span class="keyword">public class</span> <span class="class">User</span> {
+    
+    <span class="annotation">@Id</span>
+    <span class="annotation">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)
+    <span class="keyword">private</span> <span class="keyword">Long</span> id;
+    
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class">String</span> name;
+    
+    <span class="annotation">@Column</span>(unique = <span class="keyword">true</span>)
+    <span class="keyword">private</span> <span class="class">String</span> email;
+    
+    <span class="comment">// Getters and Setters</span>
+}
+
+<span class="annotation">@Repository</span>
+<span class="keyword">public interface</span> <span class="class">UserRepository</span> <span class="keyword">extends</span> <span class="class">JpaRepository</span><span class="keyword"><</span><span class="class">User</span>, <span class="class">Long</span><span class="keyword">></span> {
+    <span class="class">Optional</span><span class="keyword"><</span><span class="class">User</span><span class="keyword">></span> <span class="method">findByEmail</span>(<span class="class">String</span> email);
+}</code></pre>
+                        
+                        <div class="exercise-box">
+                            <h5>💻 Exercise 4.3: JPA Entity Definition</h5>
+                            <p>Create a Book entity with fields for id, title, author, and ISBN. Add proper JPA annotations.</p>
+                        </div>
+                        
+                        <div class="ide-container">
+                            <div class="ide-header">
+                                <span>Java IDE - Exercise 4.3</span>
+                                <div class="ide-buttons">
+                                    <button class="ide-btn run" onclick="runCode(this)">▶ Run</button>
+                                    <button class="ide-btn" onclick="resetCode(this)">↺ Reset</button>
+                                </div>
+                            </div>
+                            <textarea class="ide-editor" placeholder="// Write your code here...">import javax.persistence.*;
+
+// Create Book entity with @Entity annotation
+
+// Add fields: id, title, author, isbn
+// Add @Id, @GeneratedValue for id
+// Add @Column for other fields
+
+@Entity
+class Book {
+    // Add your code here
+}
+
+public class JPADemo {
+    public static void main(String[] args) {
+        System.out.println("JPA Entity Demo");
+    }
+}</textarea>
+                            <div class="ide-output">
+                                <div class="ide-output-label">Output</div>
+                                <div class="ide-output-content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1035,6 +1849,75 @@
             
             lastScroll = currentScroll;
         });
+
+        // IDE Code Runner Functionality
+        function runCode(button) {
+            const container = button.closest('.ide-container');
+            const editor = container.querySelector('.ide-editor');
+            const output = container.querySelector('.ide-output-content');
+            const code = editor.value;
+            
+            // Simulated output for demo purposes
+            // In a real application, this would connect to a backend Java compiler
+            let simulatedOutput = "Compiling...\n";
+            
+            if (code.includes('System.out.println') || code.includes('print')) {
+                simulatedOutput += "\n--- Output ---\n";
+                // Extract println statements and show them
+                const lines = code.split('\n');
+                lines.forEach(line => {
+                    if (line.includes('System.out.println')) {
+                        const match = line.match(/System\.out\.println\("?([^"]*)"?/);
+                        if (match) {
+                            simulatedOutput += match[1].replace('" + ', '').replace(' + "', '') + '\n';
+                        }
+                    }
+                });
+            } else {
+                simulatedOutput += "\n--- Output ---\n";
+                simulatedOutput += "[Code executed successfully - no output]\n";
+            }
+            
+            // Add note about simulation
+            simulatedOutput += "\n--- Note ---\n";
+            simulatedOutput += "This is a simulated output. In a production environment,\n";
+            simulatedOutput += "this would connect to a Java compiler backend.\n";
+            simulatedOutput += "Try using: System.out.println(\"Your message\");\n";
+            
+            output.textContent = simulatedOutput;
+        }
+
+        function resetCode(button) {
+            const container = button.closest('.ide-container');
+            const editor = container.querySelector('.ide-editor');
+            const output = container.querySelector('.ide-output-content');
+            
+            // Reset to placeholder content
+            const placeholders = {
+                'Exercise': 'public class Exercise {\n    public static void main(String[] args) {\n        // Declare your variables below:\n        \n        // Print your information\n        System.out.println("Name: " + name);\n        System.out.println("Age: " + age);\n        System.out.println("Is Student: " + isStudent);\n    }\n}',
+                'FizzBuzz': 'public class FizzBuzz {\n    public static void main(String[] args) {\n        // Write your FizzBuzz program here\n        \n    }\n}',
+                'Calculator': 'public class Calculator {\n    \n    // Add your methods here\n    \n    public static void main(String[] args) {\n        // Test your calculator\n    }\n}',
+                'BankAccount': 'public class BankAccount {\n    // Add fields here\n    \n    // Add constructor\n    \n    // Add deposit method\n    \n    // Add withdraw method\n    \n    public static void main(String[] args) {\n        // Test your BankAccount\n    }\n}',
+                'Shape': 'public class Shape {\n    // Add area method\n    \n}\n\nclass Circle extends Shape {\n    double radius;\n    // Implement area for circle\n    \n}\n\nclass Rectangle extends Shape {\n    double width, height;\n    // Implement area for rectangle\n    \n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // Test your shapes\n    }\n}',
+                'Playable': 'interface Playable {\n    // Add play method\n}\n\nclass VideoGame implements Playable {\n    // Implement play\n    \n}\n\nclass MusicPlayer implements Playable {\n    // Implement play\n    \n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // Test your implementations\n    }\n}',
+                'GradeManager': 'import java.util.*;\n\npublic class GradeManager {\n    public static void main(String[] args) {\n        HashMap<String, Integer> grades = new HashMap<>();\n        \n        // Add students and grades\n        \n        // Calculate and print average\n        \n    }\n}',
+                'LinearSearch': 'public class LinearSearch {\n    \n    // Implement linearSearch method\n    \n    public static void main(String[] args) {\n        int[] numbers = {5, 10, 15, 20, 25, 30};\n        int target = 20;\n        \n        // Search for target and print result\n        \n    }\n}',
+                'BSTDemo': 'class TreeNode {\n    TreeNode left, right;\n    int value;\n    TreeNode(int value) { this.value = value; }\n}\n\n// Add insert and inOrder methods\n\npublic class BSTDemo {\n    public static void main(String[] args) {\n        // Build BST with: 50, 30, 70, 20, 40, 60, 80\n        \n        // Print in-order traversal\n        \n    }\n}',
+                'Application': 'import org.springframework.stereotype.Service;\n\n// Create GreetingService with @Service annotation\n\n// Add a method that returns a greeting\n\n@Service\nclass GreetingService {\n    // Add your methods here\n}\n\npublic class Application {\n    public static void main(String[] args) {\n        // Create Spring context and test\n        System.out.println("Spring Boot App");\n    }\n}',
+                'ApiDemo': 'import org.springframework.web.bind.annotation.*;\n\n// Product model (simplified)\nclass Product {\n    Long id;\n    String name;\n    double price;\n    \n    // Add getters and setters\n}\n\n// Create ProductController with @RestController\n\n@RestController\n@RequestMapping("/api/products")\nclass ProductController {\n    \n    // Implement: GET /api/products\n    // Implement: GET /api/products/{id}\n    // Implement: POST /api/products\n    \n}\n\npublic class ApiDemo {\n    public static void main(String[] args) {\n        System.out.println("REST API Demo");\n    }\n}',
+                'JPADemo': 'import javax.persistence.*;\n\n// Create Book entity with @Entity annotation\n\n// Add fields: id, title, author, isbn\n// Add @Id, @GeneratedValue for id\n// Add @Column for other fields\n\n@Entity\nclass Book {\n    // Add your code here\n}\n\npublic class JPADemo {\n    public static void main(String[] args) {\n        System.out.println("JPA Entity Demo");\n    }\n}'
+            };
+            
+            // Find the appropriate placeholder based on the exercise
+            for (const [key, value] of Object.entries(placeholders)) {
+                if (editor.value.includes(key)) {
+                    editor.value = value;
+                    break;
+                }
+            }
+            
+            output.textContent = '';
+        }
     </script>
 </body>
 </html>
