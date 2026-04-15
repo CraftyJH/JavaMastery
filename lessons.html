@@ -144,6 +144,157 @@
             color: var(--primary);
         }
 
+        /* Course Tabs */
+        .course-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--bg-card);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .course-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .course-tab:hover {
+            color: var(--text-light);
+        }
+
+        .course-tab.active {
+            background: var(--gradient-1);
+            color: var(--bg-dark);
+        }
+
+        .course-content {
+            display: none;
+        }
+
+        .course-content.active {
+            display: block;
+        }
+
+        /* Jump To Navigation */
+        .jump-to-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .jump-to-nav h4 {
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .jump-to-nav ul {
+            list-style: none;
+        }
+
+        .jump-to-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .jump-to-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: block;
+            padding: 0.25rem 0;
+            transition: all 0.2s ease;
+        }
+
+        .jump-to-nav a:hover {
+            color: var(--primary);
+            transform: translateX(-3px);
+        }
+
+        .jump-to-nav a.active {
+            color: var(--primary);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .resources-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .resource-card:hover {
+            border-color: rgba(248, 152, 28, 0.3);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .resource-card h3 {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .resource-card .tag {
+            display: inline-block;
+            background: rgba(248, 152, 28, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -539,43 +690,59 @@
             <p>A comprehensive guide to mastering Java from fundamentals to advanced concepts. Each lesson includes detailed explanations, multiple examples, and best practices.</p>
         </div>
 
-        <div class="toc">
-            <h2>📚 Table of Contents</h2>
-            <div class="toc-grid">
-                <a href="#module1" class="toc-item">
-                    <h3>Module 1: Java Fundamentals</h3>
-                    <p>Variables, data types, operators, control flow, and methods</p>
-                </a>
-                <a href="#module2" class="toc-item">
-                    <h3>Module 2: Object-Oriented Programming</h3>
-                    <p>Classes, objects, inheritance, polymorphism, interfaces</p>
-                </a>
-                <a href="#module3" class="toc-item">
-                    <h3>Module 3: Data Structures</h3>
-                    <p>Arrays, collections, lists, maps, sets</p>
-                </a>
-                <a href="#module4" class="toc-item">
-                    <h3>Module 4: Algorithms</h3>
-                    <p>Searching, sorting, time complexity, big O notation</p>
-                </a>
-                <a href="#module5" class="toc-item">
-                    <h3>Module 5: Exception Handling</h3>
-                    <p>Try-catch, throws, custom exceptions, best practices</p>
-                </a>
-                <a href="#module6" class="toc-item">
-                    <h3>Module 6: File I/O</h3>
-                    <p>Reading/writing files, streams, serialization</p>
-                </a>
-                <a href="#module7" class="toc-item">
-                    <h3>Module 7: Generics</h3>
-                    <p>Generic classes, methods, wildcards, bounds</p>
-                </a>
-                <a href="#module8" class="toc-item">
-                    <h3>Module 8: Lambdas & Streams</h3>
-                    <p>Functional programming, lambda expressions, stream API</p>
-                </a>
-            </div>
+        <!-- Course Tabs -->
+        <div class="course-tabs">
+            <button class="course-tab active" onclick="switchCourse('course1')">📖 Course 1: Foundations</button>
+            <button class="course-tab" onclick="switchCourse('course2')">🚀 Course 2: Advanced Topics</button>
         </div>
+
+        <!-- Jump To Navigation -->
+        <nav class="jump-to-nav" id="jumpToNav">
+            <h4>Jump To</h4>
+            <ul id="jumpToList">
+                <!-- Dynamically populated -->
+            </ul>
+        </nav>
+
+        <!-- Course 1: Foundations -->
+        <div id="course1" class="course-content active">
+            <div class="toc">
+                <h2>📚 Course 1 - Table of Contents</h2>
+                <div class="toc-grid">
+                    <a href="#module1" class="toc-item">
+                        <h3>Module 1: Java Fundamentals</h3>
+                        <p>Variables, data types, operators, control flow, and methods</p>
+                    </a>
+                    <a href="#module2" class="toc-item">
+                        <h3>Module 2: Object-Oriented Programming</h3>
+                        <p>Classes, objects, inheritance, polymorphism, interfaces</p>
+                    </a>
+                    <a href="#module3" class="toc-item">
+                        <h3>Module 3: Data Structures</h3>
+                        <p>Arrays, collections, lists, maps, sets</p>
+                    </a>
+                    <a href="#module4" class="toc-item">
+                        <h3>Module 4: Algorithms</h3>
+                        <p>Searching, sorting, time complexity, big O notation</p>
+                    </a>
+                    <a href="#module5" class="toc-item">
+                        <h3>Module 5: Exception Handling</h3>
+                        <p>Try-catch, throws, custom exceptions, best practices</p>
+                    </a>
+                    <a href="#module6" class="toc-item">
+                        <h3>Module 6: File I/O</h3>
+                        <p>Reading/writing files, streams, serialization</p>
+                    </a>
+                    <a href="#module7" class="toc-item">
+                        <h3>Module 7: Generics</h3>
+                        <p>Generic classes, methods, wildcards, bounds</p>
+                    </a>
+                    <a href="#module8" class="toc-item">
+                        <h3>Module 8: Lambdas & Streams</h3>
+                        <p>Functional programming, lambda expressions, stream API</p>
+                    </a>
+                </div>
+            </div>
 
         <!-- MODULE 1: Java Fundamentals -->
         <div id="module1" class="lesson-section">
@@ -1959,10 +2126,1149 @@ names.<span class="method">stream</span>()
                 </div>
             </div>
         </div>
+        </div><!-- End Course 1 -->
+
+        <!-- Course 2: Advanced Topics -->
+        <div id="course2" class="course-content">
+            <div class="toc">
+                <h2>🚀 Course 2 - Table of Contents</h2>
+                <div class="toc-grid">
+                    <a href="#module9" class="toc-item">
+                        <h3>Module 9: Multithreading & Concurrency</h3>
+                        <p>Threads, executors, synchronization, atomic operations</p>
+                    </a>
+                    <a href="#module10" class="toc-item">
+                        <h3>Module 10: Design Patterns</h3>
+                        <p>SOLID principles, creational, structural, behavioral patterns</p>
+                    </a>
+                    <a href="#module11" class="toc-item">
+                        <h3>Module 11: Spring Boot</h3>
+                        <p>REST APIs, dependency injection, Spring Data JPA</p>
+                    </a>
+                    <a href="#module12" class="toc-item">
+                        <h3>Module 12: Testing</h3>
+                        <p>Unit tests, JUnit 5, mocking, test-driven development</p>
+                    </a>
+                    <a href="#module13" class="toc-item">
+                        <h3>Module 13: Database & JPA</h3>
+                        <p>JDBC, JPA/Hibernate, entities, relationships</p>
+                    </a>
+                    <a href="#module14" class="toc-item">
+                        <h3>Module 14: Performance & Optimization</h3>
+                        <p>Profiling, memory management, JVM tuning</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- MODULE 9: Multithreading & Concurrency -->
+            <div id="module9" class="lesson-section">
+                <h2>📖 Module 9: Multithreading & Concurrency <span class="badge">Advanced</span></h2>
+                <p>MultiThreaded programming allows concurrent execution of multiple threads. Essential for building responsive applications and utilizing multi-core processors effectively.</p>
+
+                <div class="concept">
+                    <h3>9.1 Thread Basics</h3>
+                    
+                    <h4>Creating a Thread</h4>
+                    <p>There are two primary ways to create threads in Java:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Method 1: Extend Thread class</span>
+<span class="keyword">class</span> <span class="class">MyThread</span> <span class="keyword">extends</span> <span class="class">Thread</span> {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> <span class="method">run</span>() {
+        <span class="comment">// Code to run in thread</span>
+        System.out.println(<span class="string">"Thread running!"</span>);
+    }
+}
+
+<span class="comment">// Usage</span>
+<span class="class">MyThread</span> thread = <span class="keyword">new</span> <span class="class">MyThread</span>();
+thread.<span class="method">start</span>();  <span class="comment">// Don't call run() directly!</span></code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Method 2: Implement Runnable interface</span>
+<span class="keyword">class</span> <span class="class">MyTask</span> <span class="keyword">implements</span> <span class="class">Runnable</span> {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> <span class="method">run</span>() {
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+            System.out.println(<span class="string">"Count: "</span> + i);
+        }
+    }
+}
+
+<span class="comment">// Usage</span>
+<span class="class">Runnable</span> task = <span class="keyword">new</span> <span class="class">MyTask</span>();
+<span class="class">Thread</span> thread = <span class="keyword">new</span> <span class="class">Thread</span>(task);
+thread.<span class="method">start</span>();</code></pre>
+                    </div>
+
+                    <h4>Thread States</h4>
+                    <p>A thread can be in one of these states:</p>
+                    <ul>
+                        <li><strong>NEW</strong> - Thread created but not started</li>
+                        <li><strong>RUNNABLE</strong> - Currently executing</li>
+                        <li><strong>BLOCKED</strong> - Waiting for monitor lock</li>
+                        <li><strong>WAITING</strong> - Waiting indefinitely</li>
+                        <li><strong>TIMED_WAITING</strong> - Waiting with timeout</li>
+                        <li><strong>TERMINATED</strong> - Finished execution</li>
+                    </ul>
+
+                    <div class="note">
+                        <h4>💡 Important</h4>
+                        <p>Always call start() to begin thread execution, not run(). Calling run() executes synchronously in the main thread!</p>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>9.2 Thread Synchronization</h3>
+                    
+                    <h4>The synchronized Keyword</h4>
+                    <p>Prevent concurrent access to shared resources using synchronized methods or blocks:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> <span class="class">Counter</span> {
+    <span class="keyword">private int</span> count = <span class="number">0</span>;
+    
+    <span class="comment">// Synchronized method - locks on 'this'</span>
+    <span class="keyword">public synchronized void</span> <span class="method">increment</span>() {
+        count++;
+    }
+    
+    <span class="comment">// Synchronized static method - locks on Class object</span>
+    <span class="keyword">public static synchronized void</span> <span class="method">doSomething</span>() {
+        <span class="comment">// Synchronized code</span>
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> <span class="class">BankAccount</span> {
+    <span class="keyword">private double</span> balance;
+    <span class="keyword">private final</span> <span class="class">Object</span> lock = <span class="keyword">new</span> <span class="class">Object</span>();
+    
+    <span class="keyword">public void</span> <span class="method">withdraw</span>(<span class="keyword">double</span> amount) {
+        <span class="comment">// Synchronized block - more granular control</span>
+        <span class="keyword">synchronized</span> (lock) {
+            <span class="keyword">if</span> (balance >= amount) {
+                balance -= amount;
+                System.out.println(<span class="string">"Withdrawn: "</span> + amount);
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>9.3 Executor Framework</h3>
+                    
+                    <h4>Using Executors</h4>
+                    <p>The Executor framework provides thread pool management - no need to manually create threads:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+
+<span class="class">ExecutorService</span> executor = <span class="class">Executors</span>.<span class="method">newFixedThreadPool</span>(<span class="number">4</span>);
+
+<span class="comment">// Submit tasks</span>
+executor.<span class="method">submit</span>(() -> System.out.println(<span class="string">"Task 1"</span>));
+executor.<span class="method">submit</span>(() -> System.out.println(<span class="string">"Task 2"</span>));
+executor.<span class="method">submit</span>(() -> System.out.println(<span class="string">"Task 3"</span>));
+
+<span class="comment">// Shutdown gracefully</span>
+executor.<span class="method">shutdown</span>();</code></pre>
+                    </div>
+
+                    <h4>Callable and Future</h4>
+                    <p>Get results from threads using Callable and Future:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="class">ExecutorService</span> executor = <span class="class">Executors</span>.<span class="method">newSingleThreadExecutor</span>();
+
+<span class="comment">// Submit Callable task</span>
+<span class="class">Future</span><<span class="class">Integer</span>> future = executor.<span class="method">submit</span>(() -> {
+    <span class="keyword">int</span> sum = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">100</span>; i++) sum += i;
+    <span class="keyword">return</span> sum;
+});
+
+<span class="comment">// Get result (blocks until available)</span>
+<span class="class">Integer</span> result = future.<span class="method">get</span>();  <span class="comment">// Returns 5050</span>
+
+executor.<span class="method">shutdown</span>();</code></pre>
+                    </div>
+
+                    <div class="tip">
+                        <h4>💡 Best Practice</h4>
+                        <p>Always call shutdown() to allow existing tasks to complete, or shutdownNow() to stop all running tasks immediately.</p>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>9.4 Atomic Classes</h3>
+                    
+                    <h4>java.util.concurrent.atomic</h4>
+                    <p>Lock-free thread-safe operations using atomic classes:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.concurrent.atomic.*;
+
+<span class="comment">// AtomicInteger - lock-free counter</span>
+<span class="class">AtomicInteger</span> counter = <span class="keyword">new</span> <span class="class">AtomicInteger</span>(<span class="number">0</span>);
+counter.<span class="method">incrementAndGet</span>();  <span class="comment">// ++counter</span>
+counter.<span class="method">getAndIncrement</span>();  <span class="comment">// counter++</span>
+counter.<span class="method">addAndGet</span>(<span class="number">10</span>);  <span class="comment">// counter += 10</span>
+
+<span class="comment">// AtomicReference - lock-free object access</span>
+<span class="class">AtomicReference</span><<span class="class">String</span>> ref = <span class="keyword">new</span> <span class="class">AtomicReference</span><>(<span class="string">"initial"</span>);
+ref.<span class="method">set</span>(<span class="string">"new value"</span>);
+ref.<span class="method">get</span>();  <span class="comment">// "new value"</span>
+
+<span class="comment">// Compare-and-swap (CAS) operation</span>
+ref.<span class="method">compareAndSet</span>(<span class="string">"initial"</span>, <span class="string">"updated"</span>);  <span class="comment">// true if current == expected</span></code></pre>
+                    </div>
+
+                    <h4>When to Use Atomic vs synchronized</h4>
+                    <ul>
+                        <li><strong>Atomic classes</strong> - Simple operations, better performance under high contention</li>
+                        <li><strong>synchronized</strong> - Complex operations requiring atomicity of multiple steps</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MODULE 10: Design Patterns -->
+            <div id="module10" class="lesson-section">
+                <h2>📖 Module 10: Design Patterns <span class="badge">Advanced</span></h2>
+                <p>Design patterns are reusable solutions to common software design problems. They represent best practices evolved over time by experienced developers.</p>
+
+                <div class="concept">
+                    <h3>10.1 SOLID Principles</h3>
+                    
+                    <h4>The Five Principles</h4>
+                    <ul>
+                        <li><strong>S</strong>ingle Responsibility - A class has one reason to change</li>
+                        <li><strong>O</strong>pen/Closed - Open for extension, closed for modification</li>
+                        <li><strong>L</strong>iskov Substitution - Subtypes must be substitutable for base types</li>
+                        <li><strong>I</strong>nterface Segregation - Many small interfaces > one large interface</li>
+                        <li><strong>D</strong>ependency Inversion - Depend on abstractions, not concretions</li>
+                    </ul>
+
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Single Responsibility Example</span>
+<span class="comment">// BAD: One class does too much</span>
+<span class="keyword">class</span> <span class="class">UserManager</span> {
+    <span class="keyword">void</span> saveUser() { <span class="comment">/* save to DB */</span> }
+    <span class="keyword">void</span> sendEmail() { <span class="comment">/* send email */</span> }
+    <span class="keyword">void</span> generateReport() { <span class="comment">/* generate report */</span> }
+}
+
+<span class="comment">// GOOD: Separation of concerns</span>
+<span class="keyword">class</span> <span class="class">UserRepository</span> { <span class="keyword">void</span> saveUser() { } }
+<span class="keyword">class</span> <span class="class">EmailService</span> { <span class="keyword">void</span> sendEmail() { } }
+<span class="keyword">class</span> <span class="class">ReportGenerator</span> { <span class="keyword">void</span> generateReport() { } }</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>10.2 Creational Patterns</h3>
+                    
+                    <h4>Singleton Pattern</h4>
+                    <p>Ensure a class has only one instance:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> <span class="class">DatabaseConnection</span> {
+    <span class="keyword">private static</span> <span class="class">DatabaseConnection</span> instance;
+    
+    <span class="keyword">private</span> <span class="class">DatabaseConnection</span>() {
+        <span class="comment">// Private constructor</span>
+    }
+    
+    <span class="keyword">public static</span> <span class="class">DatabaseConnection</span> <span class="method">getInstance</span>() {
+        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) {
+            instance = <span class="keyword">new</span> <span class="class">DatabaseConnection</span>();
+        }
+        <span class="keyword">return</span> instance;
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Factory Method Pattern</h4>
+                    <p>Create objects without specifying exact classes:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Product interface</span>
+<span class="keyword">interface</span> <span class="class">Notification</span> {
+    <span class="keyword">void</span> <span class="method">send</span>(<span class="class">String</span> message);
+}
+
+<span class="comment">// Concrete products</span>
+<span class="keyword">class</span> <span class="class">EmailNotification</span> <span class="keyword">implements</span> <span class="class">Notification</span> {
+    <span class="keyword">public void</span> <span class="method">send</span>(<span class="class">String</span> msg) { <span class="comment">/* send email */</span> }
+}
+
+<span class="keyword">class</span> <span class="class">SMSNotification</span> <span class="keyword">implements</span> <span class="class">Notification</span> {
+    <span class="keyword">public void</span> <span class="method">send</span>(<span class="class">String</span> msg) { <span class="comment">/* send SMS */</span> }
+}
+
+<span class="comment">// Factory</span>
+<span class="keyword">class</span> <span class="class">NotificationFactory</span> {
+    <span class="keyword">public static</span> <span class="class">Notification</span> <span class="method">create</span>(<span class="class">String</span> type) {
+        <span class="keyword">return switch</span> (type) {
+            <span class="keyword">case</span> <span class="string">"email"</span> -> <span class="keyword">new</span> <span class="class">EmailNotification</span>();
+            <span class="keyword">case</span> <span class="string">"sms"</span> -> <span class="keyword">new</span> <span class="class">SMSNotification</span>();
+            <span class="keyword">default</span> -> <span class="keyword">throw new</span> <span class="class">IllegalArgumentException</span>();
+        };
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>10.3 Behavioral Patterns</h3>
+                    
+                    <h4>Observer Pattern</h4>
+                    <p>One-to-many dependency where changes notify observers:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Observer interface</span>
+<span class="keyword">interface</span> <span class="class">Observer</span> {
+    <span class="keyword">void</span> <span class="method">update</span>(<span class="class">String</span> message);
+}
+
+<span class="comment">// Subject</span>
+<span class="keyword">class</span> <span class="class">NewsChannel</span> {
+    <span class="keyword">private final</span> <span class="class">List</span><<span class="class">Observer</span>> observers = <span class="class">new</span> <span class="class">ArrayList</span<>();
+    <span class="keyword">private</span> <span class="class">String</span> latestNews;
+    
+    <span class="keyword">public void</span> <span class="method">attach</span>(<span class="class">Observer</span> o) { observers.<span class="method">add</span>(o); }
+    
+    <span class="keyword">public void</span> <span class="method">detach</span>(<span class="class">Observer</span> o) { observers.<span class="method">remove</span>(o); }
+    
+    <span class="keyword">public void</span> <span class="method">notifyAll</span>() {
+        observers.<span class="method">forEach</span>(o -> o.<span class="method">update</span>(latestNews));
+    }
+    
+    <span class="keyword">public void</span> <span class="method">publishNews</span>(<span class="class">String</span> news) {
+        latestNews = news;
+        <span class="method">notifyAll</span>();
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Strategy Pattern</h4>
+                    <p>Define interchangeable algorithms:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Strategy interface</span>
+<span class="keyword">interface</span> <span class="class">PaymentStrategy</span> {
+    <span class="keyword">void</span> <span class="method">pay</span>(<span class="keyword">double</span> amount);
+}
+
+<span class="comment">// Concrete strategies</span>
+<span class="keyword">class</span> <span class="class">CreditCardPayment</span> <span class="keyword">implements</span> <span class="class">PaymentStrategy</span> {
+    <span class="keyword">public void</span> <span class="method">pay</span>(<span class="keyword">double</span> amount) { 
+        System.out.println(<span class="string">"Paid "</span> + amount + <span class="string">" via Credit Card"</span>); 
+    }
+}
+
+<span class="keyword">class</span> <span class="class">PayPalPayment</span> <span class="keyword">implements</span> <span class="class">PaymentStrategy</span> {
+    <span class="keyword">public void</span> <span class="method">pay</span>(<span class="keyword">double</span> amount) { 
+        System.out.println(<span class="string">"Paid "</span> + amount + <span class="string">" via PayPal"</span>); 
+    }
+}
+
+<span class="comment">// Context</span>
+<span class="keyword">class</span> <span class="class">ShoppingCart</span> {
+    <span class="keyword">private</span> <span class="class">PaymentStrategy</span> paymentStrategy;
+    
+    <span class="keyword">public void</span> <span class="method">setPaymentStrategy</span>(<span class="class">PaymentStrategy</span> strategy) {
+        <span class="keyword">this</span>.paymentStrategy = strategy;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">checkout</span>(<span class="keyword">double</span> amount) {
+        paymentStrategy.<span class="method">pay</span>(amount);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>10.4 Structural Patterns</h3>
+                    
+                    <h4>Decorator Pattern</h4>
+                    <p>Add behavior dynamically without modifying original class:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Base component</span>
+<span class="keyword">interface</span> <span class="class">Coffee</span> {
+    <span class="keyword">double</span> <span class="method">getPrice</span>();
+    <span class="class">String</span> <span class="method">getDescription</span>();
+}
+
+<span class="comment">// Concrete component</span>
+<span class="keyword">class</span> <span class="class">SimpleCoffee</span> <span class="keyword">implements</span> <span class="class">Coffee</span> {
+    <span class="keyword">public double</span> <span class="method">getPrice</span>() { <span class="keyword">return</span> <span class="number">5.0</span>; }
+    <span class="keyword">public</span> <span class="class">String</span> <span class="method">getDescription</span>() { <span class="keyword">return</span> <span class="string">"Simple Coffee"</span>; }
+}
+
+<span class="comment">// Base decorator</span>
+<span class="keyword">abstract class</span> <span class="class">CoffeeDecorator</span> <span class="keyword">implements</span> <span class="class">Coffee</span> {
+    <span class="keyword">protected</span> <span class="class">Coffee</span> coffee;
+    <span class="class">CoffeeDecorator</span>(<span class="class">Coffee</span> coffee) { <span class="keyword">this</span>.coffee = coffee; }
+}
+
+<span class="comment">// Concrete decorators</span>
+<span class="keyword">class</span> <span class="class">MilkDecorator</span> <span class="keyword">extends</span> <span class="class">CoffeeDecorator</span> {
+    <span class="class">MilkDecorator</span>(<span class="class">Coffee</span> c) { <span class="keyword">super</span>(c); }
+    <span class="keyword">public double</span> <span class="method">getPrice</span>() { <span class="keyword">return</span> coffee.<span class="method">getPrice</span>() + <span class="number">1.5</span>; }
+    <span class="keyword">public</span> <span class="class">String</span> <span class="method">getDescription</span>() { 
+        <span class="keyword">return</span> coffee.<span class="method">getDescription</span>() + <span class="string">", Milk"</span>; 
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="tip">
+                        <h4>💡 Remember</h4>
+                        <p>Don't over-engineer! Use patterns when they provide clear benefit - simpler solutions are often better. Patterns are tools, not rules.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 11: Spring Boot -->
+            <div id="module11" class="lesson-section">
+                <h2>📖 Module 11: Spring Boot <span class="badge">Advanced</span></h2>
+                <p>Spring Boot simplifies Java enterprise development by providing conventions over configuration, embedded servers, and auto-configuration.</p>
+
+                <div class="concept">
+                    <h3>11.1 Getting Started</h3>
+                    
+                    <h4>Creating a Spring Boot Application</h4>
+                    <p>Main application class:</p>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+
+<span class="annotation">@SpringBootApplication</span>
+<span class="keyword">public class</span> <span class="class">Application</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class">String</span>[] args) {
+        <span class="class">SpringApplication</span>.<span class="method">run</span>(<span class="class">Application</span>.<span class="keyword">class</span>, args);
+    }
+}</code></pre>
+                    </div>
+
+                    <p>The @SpringBootApplication annotation combines:</p>
+                    <ul>
+                        <li><strong>@Configuration</strong> - Marks class as bean definition source</li>
+                        <li><strong>@EnableAutoConfiguration</strong> - Enables Spring Boot auto-configuration</li>
+                        <li><strong>@ComponentScan</strong> - Enables component scanning</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>11.2 REST Controllers</h3>
+                    
+                    <h4>Creating REST Endpoints</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.springframework.web.bind.annotation.*;
+
+<span class="annotation">@RestController</span>
+<span class="annotation">@RequestMapping</span>(<span class="string">"/api/users"</span>)
+<span class="keyword">public class</span> <span class="class">UserController</span> {
+    
+    <span class="annotation">@GetMapping</span>
+    <span class="keyword">public</span> <span class="class">List</span><<span class="class">User</span>> <span class="method">getAllUsers</span>() {
+        <span class="keyword">return</span> userService.<span class="method">findAll</span>();
+    }
+    
+    <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">getUser</span>(<span class="annotation">@PathVariable</span> <span class="class">Long</span> id) {
+        <span class="keyword">return</span> userService.<span class="method">findById</span>(id);
+    }
+    
+    <span class="annotation">@PostMapping</span>
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">createUser</span>(<span class="annotation">@RequestBody</span> <span class="class">User</span> user) {
+        <span class="keyword">return</span> userService.<span class="method">save</span>(user);
+    }
+    
+    <span class="annotation">@PutMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">updateUser</span>(
+            <span class="annotation">@PathVariable</span> <span class="class">Long</span> id,
+            <span class="annotation">@RequestBody</span> <span class="class">User</span> user) {
+        user.<span class="method">setId</span>(id);
+        <span class="keyword">return</span> userService.<span class="method">save</span>(user);
+    }
+    
+    <span class="annotation">@DeleteMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public void</span> <span class="method">deleteUser</span>(<span class="annotation">@PathVariable</span> <span class="class">Long</span> id) {
+        userService.<span class="method">deleteById</span>(id);
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>HTTP Method Mapping</h4>
+                    <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 0.75rem;"><strong>@GetMapping</strong></td>
+                            <td style="padding: 0.75rem;">Retrieve resources</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 0.75rem;"><strong>@PostMapping</strong></td>
+                            <td style="padding: 0.75rem;">Create new resource</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 0.75rem;"><strong>@PutMapping/@PatchMapping</strong></td>
+                            <td style="padding: 0.75rem;">Update existing resource</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem;"><strong>@DeleteMapping</strong></td>
+                            <td style="padding: 0.75rem;">Delete resource</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept">
+                    <h3>11.3 Dependency Injection</h3>
+                    
+                    <h4>Service Layer</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="annotation">@Service</span>
+<span class="keyword">public class</span> <span class="class">UserService</span> {
+    
+    <span class="keyword">private final</span> <span class="class">UserRepository</span> userRepository;
+    
+    <span class="comment">// Constructor injection (recommended)</span>
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">public</span> <span class="class">UserService</span>(<span class="class">UserRepository</span> userRepository) {
+        <span class="keyword">this</span>.userRepository = userRepository;
+    }
+    
+    <span class="keyword">public</span> <span class="class">List</span><<span class="class">User</span>> <span class="method">findAll</span>() {
+        <span class="keyword">return</span> userRepository.<span class="method">findAll</span>();
+    }
+    
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">findById</span>(<span class="class">Long</span> id) {
+        <span class="keyword">return</span> userRepository.<span class="method">findById</span>(id)
+            .<span class="method">orElseThrow</span>(() -> <span class="keyword">new</span> <span class="class">UserNotFoundException</span>(id));
+    }
+    
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">save</span>(<span class="class">User</span> user) {
+        <span class="keyword">return</span> userRepository.<span class="method">save</span>(user);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">deleteById</span>(<span class="class">Long</span> id) {
+        userRepository.<span class="method">deleteById</span>(id);
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Stereotype Annotations</h4>
+                    <ul>
+                        <li><strong>@Component</strong> - Generic component</li>
+                        <li><strong>@Service</strong> - Business logic layer</li>
+                        <li><strong>@Repository</strong> - Data access layer</li>
+                        <li><strong>@Controller</strong> - Web controllers</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>11.4 Application Properties</h3>
+                    
+                    <h4>application.properties / application.yml</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Server port</span>
+server.port=<span class="number">8080</span>
+
+<span class="comment"># DataSource configuration</span>
+spring.datasource.url=jdbc:postgresql://localhost:5432/mydb
+spring.datasource.username=postgres
+spring.datasource.password=secret
+
+<span class="comment"># JPA/Hibernate</span>
+spring.jpa.show-sql=<span class="keyword">true</span>
+spring.jpa.hibernate.ddl-auto=update
+
+<span class="comment"># Logging</span>
+logging.level.org.springframework.web=DEBUG
+logging.level.org.hibernate.SQL=DEBUG</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 12: Testing -->
+            <div id="module12" class="lesson-section">
+                <h2>📖 Module 12: Testing <span class="badge">Advanced</span></h2>
+                <p>Testing is crucial for building reliable software. This module covers unit testing, integration testing, and test-driven development with JUnit 5.</p>
+
+                <div class="concept">
+                    <h3>12.1 JUnit 5 Basics</h3>
+                    
+                    <h4>Your First Test</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.junit.jupiter.api.Test;
+<span class="keyword">import static</span> org.junit.jupiter.api.*;
+
+<span class="keyword">class</span> <span class="class">CalculatorTest</span> {
+    
+    <span class="keyword">private</span> <span class="class">Calculator</span> calculator = <span class="keyword">new</span> <span class="class">Calculator</span>();
+    
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> <span class="method">testAdd</span>() {
+        <span class="class">int</span> result = calculator.<span class="method">add</span>(<span class="number">2</span>, <span class="number">3</span>);
+        <span class="class">Assertions</span>.<span class="method">assertEquals</span>(<span class="number">5</span>, result);
+    }
+    
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> <span class="method">testDivideByZero</span>() {
+        <span class="class">Assertions</span>.<span class="method">assertThrows</span>(
+            <span class="class">ArithmeticException</span>.<span class="keyword">class</span>,
+            () -> calculator.<span class="method">divide</span>(<span class="number">10</span>, <span class="number">0</span>)
+        );
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Test Lifecycle</h4>
+                    <ul>
+                        <li><strong>@BeforeEach</strong> - Run before each test method</li>
+                        <li><strong>@AfterEach</strong> - Run after each test method</li>
+                        <li><strong>@BeforeAll</strong> - Run once before all tests (must be static)</li>
+                        <li><strong>@AfterAll</strong> - Run once after all tests (must be static)</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>12.2 Test-Driven Development (TDD)</h3>
+                    
+                    <h4>The TDD Cycle</h4>
+                    <ol>
+                        <li><strong>Red</strong> - Write a failing test</li>
+                        <li><strong>Green</strong> - Make the test pass</li>
+                        <li><strong>Refactor</strong> - Improve code while keeping tests passing</li>
+                    </ol>
+
+                    <h4>TDD Example</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Step 1: Red - Write failing test</span>
+<span class="annotation">@Test</span>
+<span class="keyword">void</span> <span class="method">testFizzBuzzFizz</span>() {
+    <span class="class">String</span> result = fizzBuzz.<span class="method">convert</span>(<span class="number">3</span>);
+    <span class="class">Assertions</span>.<span class="method">assertEquals</span>(<span class="string">"Fizz"</span>, result);
+}
+
+<span class="comment">// Step 2: Green - Make it pass</span>
+<span class="keyword">public</span> <span class="class">String</span> <span class="method">convert</span>(<span class="keyword">int</span> n) {
+    <span class="keyword">if</span> (n % <span class="number">3</span> == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"Fizz"</span>;
+    <span class="keyword">return</span> <span class="class">String</span>.<span class="method">valueOf</span>(n);
+}
+
+<span class="comment">// Step 3: Refactor - Clean up code</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>12.3 Mocking with Mockito</h3>
+                    
+                    <h4>Creating Mocks</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.mockito.Mockito;
+
+<span class="keyword">class</span> <span class="class">UserServiceTest</span> {
+    
+    <span class="keyword">private</span> <span class="class">UserRepository</span> mockRepository;
+    <span class="keyword">private</span> <span class="class">UserService</span> userService;
+    
+    <span class="annotation">@BeforeEach</span>
+    <span class="keyword">void</span> <span class="method">setUp</span>() {
+        mockRepository = <span class="class">Mockito</span>.<span class="method">mock</span>(<span class="class">UserRepository</span>.<span class="keyword">class</span>);
+        userService = <span class="keyword">new</span> <span class="class">UserService</span>(mockRepository);
+    }
+    
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> <span class="method">testFindActiveUsers</span>() {
+        <span class="comment">// Setup mock behavior</span>
+        <span class="class">List</span><<span class="class">User</span>> mockUsers = <span class="class">Arrays</span>.<span class="method">asList</span>(
+            <span class="keyword">new</span> <span class="class">User</span>(<span class="string">"Alice"</span>, <span class="keyword">true</span>),
+            <span class="keyword">new</span> <span class="class">User</span>(<span class="string">"Bob"</span>, <span class="keyword">false</span>)
+        );
+        <span class="class">Mockito</span>.<span class="method">when</span>(mockRepository.<span class="method">findAll</span>())
+            .<span class="method">thenReturn</span>(mockUsers);
+        
+        <span class="comment">// Execute</span>
+        <span class="class">List</span><<span class="class">User</span>> active = userService.<span class="method">findActiveUsers</span>();
+        
+        <span class="comment">// Assert</span>
+        <span class="class">Assertions</span>.<span class="method">assertEquals</span>(<span class="number">1</span>, active.<span class="method">size</span>());
+        <span class="class">Assertions</span>.<span class="method">assertEquals</span>(<span class="string">"Alice"</span>, active.<span class="method">get</span>(<span class="number">0</span>).<span class="method">getName</span>());
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Common Mockito Methods</h4>
+                    <ul>
+                        <li><strong>mock(Class)</strong> - Create mock object</li>
+                        <li><strong>when(mock.method()).thenReturn(value)</strong> - Stub behavior</li>
+                        <li><strong>verify(mock).method()</strong> - Verify interaction</li>
+                        <li><strong>thenThrow(Exception)</strong> - Stub exception</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>12.4 Integration Testing</h3>
+                    
+                    <h4>Spring Boot Test</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;
+<span class="keyword">import</span> org.springframework.test.web.reactive.server.WebTestClient;
+
+<span class="annotation">@SpringBootTest</span>
+<span class="keyword">class</span> <span class="class">UserControllerIntegrationTest</span> {
+    
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">private</span> <span class="class">WebTestClient</span> webTestClient;
+    
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> <span class="method">testGetAllUsers</span>() {
+        webTestClient.<span class="method">get</span>()
+            .<span class="method">uri</span>(<span class="string">"/api/users"</span>)
+            .<span class="method">exchange</span>()
+            .<span class="method">expectStatus</span>().<span class="method">isOk</span>()
+            .<span class="method">expectBody</span>()
+            .<span class="method">json</span>(<span class="string">"$[0].name"</span>, <span class="string">"Alice"</span>);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="tip">
+                        <h4>💡 Testing Best Practices</h4>
+                        <ul>
+                            <li>Test one thing per test method</li>
+                            <li>Use descriptive test names</li>
+                            <li>Follow AAA pattern (Arrange, Act, Assert)</li>
+                            <li>Keep tests fast - aim for milliseconds</li>
+                            <li>Isolate tests - no dependencies between them</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 13: Database & JPA -->
+            <div id="module13" class="lesson-section">
+                <h2>📖 Module 13: Database & JPA <span class="badge">Advanced</span></h2>
+                <p>Learn how to interact with databases using JDBC and JPA/Hibernate for object-relational mapping.</p>
+
+                <div class="concept">
+                    <h3>13.1 JPA Entities</h3>
+                    
+                    <h4>Creating an Entity</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> javax.persistence.*;
+
+<span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"users"</span>)
+<span class="keyword">public class</span> <span class="class">User</span> {
+    
+    <span class="annotation">@Id</span>
+    <span class="annotation">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)
+    <span class="keyword">private</span> <span class="class">Long</span> id;
+    
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>, unique = <span class="keyword">true</span>)
+    <span class="keyword">private</span> <span class="class">String</span> email;
+    
+    <span class="annotation">@Column</span>(name = <span class="string">"full_name"</span>)
+    <span class="keyword">private</span> <span class="class">String</span> name;
+    
+    <span class="annotation">@Column</span>(length = <span class="number">500</span>)
+    <span class="keyword">private</span> <span class="class">String</span> bio;
+    
+    <span class="annotation">@Temporal</span>(TemporalType.DATE)
+    <span class="keyword">private</span> <span class="class">Date</span> birthDate;
+    
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="keyword">boolean</span> active = <span class="keyword">true</span>;
+
+    <span class="comment">// Getters and Setters</span>
+}</code></pre>
+                    </div>
+
+                    <h4>Common JPA Annotations</h4>
+                    <ul>
+                        <li><strong>@Entity</strong> - Marks class as JPA entity</li>
+                        <li><strong>@Id</strong> - Primary key</li>
+                        <li><strong>@GeneratedValue</strong> - Auto-generate ID</li>
+                        <li><strong>@Column</strong> - Column configuration</li>
+                        <li><strong>@Table</strong> - Table name</li>
+                        <li><strong>@Transient</strong> - Non-persisted field</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>13.2 Relationships</h3>
+                    
+                    <h4>One-to-Many / Many-to-One</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> <span class="class">Department</span> {
+    <span class="annotation">@Id</span> <span class="annotation">@GeneratedValue</span>
+    <span class="keyword">private</span> <span class="class">Long</span> id;
+    
+    <span class="annotation">@OneToMany</span>(mappedBy = <span class="string">"department"</span>, cascade = CascadeType.ALL)
+    <span class="keyword">private</span> <span class="class">List</span><<span class="class">Employee</span>> employees;
+}
+
+<span class="keyword">class</span> <span class="class">Employee</span> {
+    <span class="annotation">@Id</span> <span class="annotation">@GeneratedValue</span>
+    <span class="keyword">private</span> <span class="class">Long</span> id;
+    
+    <span class="annotation">@ManyToOne</span>
+    <span class="annotation">@JoinColumn</span>(name = <span class="string">"department_id"</span>)
+    <span class="keyword">private</span> <span class="class">Department</span> department;
+}</code></pre>
+                    </div>
+
+                    <h4>Many-to-Many</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> <span class="class">Student</span> {
+    <span class="annotation">@Id</span> <span class="annotation">@GeneratedValue</span>
+    <span class="keyword">private</span> <span class="class">Long</span> id;
+    
+    <span class="annotation">@ManyToMany</span>
+    <span class="annotation">@JoinTable</span>(
+        name = <span class="string">"student_course"</span>,
+        joinColumns = @JoinColumn(name = <span class="string">"student_id"</span>),
+        inverseJoinColumns = @JoinColumn(name = <span class="string">"course_id"</span>)
+    )
+    <span class="keyword">private</span> <span class="class">Set</span><<span class="class">Course</span>> courses;
+}
+
+<span class="keyword">class</span> <span class="class">Course</span> {
+    <span class="annotation">@Id</span> <span class="annotation">@GeneratedValue</span>
+    <span class="keyword">private</span> <span class="class">Long</span> id;
+    
+    <span class="annotation">@ManyToMany</span>(mappedBy = <span class="string">"courses"</span>)
+    <span class="keyword">private</span> <span class="class">Set</span><<span class="class">Student</span>> students;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>13.3 Spring Data JPA Repository</h3>
+                    
+                    <h4>Creating Repositories</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;
+<span class="keyword">import</span> org.springframework.data.jpa.repository.Query;
+<span class="keyword">import</span> org.springframework.data.repository.query.Param;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public interface</span> <span class="class">UserRepository</span> <span class="keyword">extends</span> <span class="class">JpaRepository</span><<span class="class">User</span>, <span class="class">UserRepositoryCustom</span> {
+    
+    <span class="comment">// Derived queries</span>
+    <span class="class">Optional</span><<span class="class">User</span> <span class="method">findByEmail</span>(<span class="class">String</span> email);
+    
+    <span class="class">List</span><<span class="class">User</span>> <span class="method">findByActive</span>(<span class="keyword">boolean</span> active);
+    
+    <span class="class">List</span><<span class="class">User</span>> <span class="method">findByNameContainingIgnoreCase</span>(<span class="class">String</span> name);
+    
+    <span class="comment">// JPQL Query</span>
+    <span class="annotation">@Query</span>(<span class="string">"SELECT u FROM User u WHERE u.active = true"</span>)
+    <span class="class">List</span><<span class="class">User</span>> <span class="method">findAllActive</span>();
+    
+    <span class="comment">// Native Query with Parameters</span>
+    <span class="annotation">@Query</span>(value = <span class="string">"SELECT * FROM users WHERE name LIKE %:name%"</span>, 
+           nativeQuery = <span class="keyword">true</span>)
+    <span class="class">List</span><<span class="class">User</span>> <span class="method">searchByName</span>(<span class="annotation">@Param</span>(<span class="string">"name"</span>) <span class="class">String</span> name);
+}</code></pre>
+                    </div>
+
+                    <h4>Repository Methods</h4>
+                    <ul>
+                        <li><strong>save(entity)</strong> - Save or update</li>
+                        <li><strong>findById(id)</strong> - Find by ID</li>
+                        <li><strong>findAll()</strong> - Find all</li>
+                        <li><strong>deleteById(id)</strong> - Delete by ID</li>
+                        <li><strong>count()</strong> - Count entities</li>
+                        <li><strong>existsById(id)</strong> - Check existence</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>13.4 Transactions</h3>
+                    
+                    <h4>@Transactional</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="annotation">@Service</span>
+<span class="keyword">public class</span> <span class="class">UserService</span> {
+    
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">private</span> <span class="class">UserRepository</span> userRepository;
+    
+    <span class="annotation">@Transactional</span>(readOnly = <span class="keyword">true</span>)
+    <span class="keyword">public</span> <span class="class">List</span><<span class="class">User</span>> <span class="method">findAll</span>() {
+        <span class="keyword">return</span> userRepository.<span class="method">findAll</span>();
+    }
+    
+    <span class="annotation">@Transactional</span>
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">create</span>(<span class="class">User</span> user) {
+        <span class="keyword">return</span> userRepository.<span class="method">save</span>(user);
+    }
+    
+    <span class="annotation">@Transactional</span>(propagation = Propagation.REQUIRES_NEW)
+    <span class="keyword">public</span> <span class="class">User</span> <span class="method">createWithNewTransaction</span>(<span class="class">User</span> user) {
+        <span class="keyword">return</span> userRepository.<span class="method">save</span>(user);
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>Propagation Options</h4>
+                    <ul>
+                        <li><strong>REQUIRED</strong> - Use existing or create new (default)</li>
+                        <li><strong>REQUIRES_NEW</strong> - Always create new transaction</li>
+                        <li><strong>SUPPORTS</strong> - Support existing, otherwise non-transactional</li>
+                        <li><strong>MANDATORY</strong> - Must run within transaction</li>
+                        <li><strong>NEVER</strong> - Must NOT run within transaction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MODULE 14: Performance & Optimization -->
+            <div id="module14" class="lesson-section">
+                <h2>📖 Module 14: Performance & Optimization <span class="badge">Advanced</span></h2>
+                <p>Learn how to profile and optimize Java applications for better performance.</p>
+
+                <div class="concept">
+                    <h3>14.1 Profiling Tools</h3>
+                    
+                    <h4>VisualVM</h4>
+                    <p>VisualVM is included with JDK and provides heap dumps, CPU profiling, and thread analysis:</p>
+                    <ul>
+                        <li>Run: <code>jvisualvm</code> from command line</li>
+                        <li>Monitor CPU and memory in real-time</li>
+                        <li>Take heap dumps for analysis</li>
+                        <li>Thread dumps for deadlock detection</li>
+                    </ul>
+
+                    <h4>JConsole</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Start application with JMX enabled</span>
+java -Dcom.sun.management.jmxremote 
+     -Dcom.sun.management.jmxremote.port=<span class="number">9010</span>
+     -Dcom.sun.management.jmxremote.ssl=<span class="keyword">false</span>
+     -Dcom.sun.management.jmxremote.authenticate=<span class="keyword">false</span>
+     -jar myapp.jar
+
+<span class="comment"># Connect with jconsole</span>
+jconsole localhost:9010</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>14.2 JVM Tuning</h3>
+                    
+                    <h4>Heap Size</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Set initial heap size to 256MB, max to 2GB</span>
+-Xms256m -Xmx2g
+
+<span class="comment"># Set young generation to 128MB</span>
+-Xmn128m
+
+<span class="comment"># Set Eden and Survivor ratios</span>
+-XX:SurvivorRatio=<span class="number">8</span>
+
+<span class="comment"># Enable G1 garbage collector</span>
+-XX:+UseG1GC
+
+<span class="comment"># Set max GC pause time goal (200ms)</span>
+-XX:MaxGCPauseMillis=<span class="number">200</span></code></pre>
+                    </div>
+
+                    <h4>Garbage Collectors</h4>
+                    <ul>
+                        <li><strong>Serial GC</strong> - Single-threaded, simple applications</li>
+                        <li><strong>Parallel GC</strong> - Multi-threaded, throughput focus</li>
+                        <li><strong>CMS GC</strong> - Low pause times</li>
+                        <li><strong>G1 GC</strong> - Balanced, modern choice</li>
+                        <li><strong>ZGC</strong> - Ultra-low latency (Java 11+)</li>
+                        <li><strong>Shenandoah</strong> - Ultra-low pause (Java 12+)</li>
+                    </ul>
+                </div>
+
+                <div class="concept">
+                    <h3>14.3 Common Performance Issues</h3>
+                    
+                    <h4>Memory Leaks</h4>
+                    <p>Common causes:</p>
+                    <ul>
+                        <li>Static collections holding references</li>
+                        <li>Unclosed resources (files, connections)</li>
+                        <li>ThreadLocal not cleaned up</li>
+                        <li>Inner class referencing outer class</li>
+                    </ul>
+
+                    <h4>Fixing ThreadLocal Leaks</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// BAD: ThreadLocal without cleanup</span>
+<span class="keyword">private static final</span> <span class="class">ThreadLocal</span><<span class="class">User</span>> currentUser = 
+    <span class="keyword">new</span> <span class="class">ThreadLocal</span<>();
+
+<span class="comment">// GOOD: Always remove after use</span>
+<span class="keyword">try</span> {
+    currentUser.<span class="method">set</span>(user);
+    <span class="comment">// Business logic</span>
+} <span class="keyword">finally</span> {
+    currentUser.<span class="method">remove</span>();  <span class="comment">// Always clean up!</span>
+}</code></pre>
+                    </div>
+
+                    <h4>Object Creation Overhead</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// BAD: Creating objects in loops</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">1000</span>; i++) {
+    <span class="class">String</span> s = <span class="keyword">new</span> <span class="class">String</span>(<span class="string">"value"</span>);  <span class="comment">// Avoid!</span>
+}
+
+<span class="comment">// GOOD: Reuse objects</span>
+<span class="class">String</span> template = <span class="string">"value"</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">1000</span>; i++) {
+    <span class="class">String</span> s = template + i;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept">
+                    <h3>14.4 String Performance</h3>
+                    
+                    <h4>StringBuilder vs String Concatenation</h4>
+                    
+                    <div class="code-block">
+                        <pre><code><span class="comment">// BAD: Repeated concatenation</span>
+<span class="class">String</span> result = <span class="string">""</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">100</span>; i++) {
+    result += i;  <span class="comment">// Creates new String each time!</span>
+}
+
+<span class="comment">// GOOD: StringBuilder</span>
+<span class="class">StringBuilder</span> sb = <span class="keyword">new</span> <span class="class">StringBuilder</span>();
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">100</span>; i++) {
+    sb.<span class="method">append</span>(i);
+}
+<span class="class">String</span> result = sb.<span class="method">toString</span>();
+
+<span class="comment">// Even better: join with delimiter</span>
+<span class="class">String</span> result = <span class="class">String</span>.<span class="method">join</span>(<span class="string">","</span>, items);</code></pre>
+                    </div>
+
+                    <h4>String Interning</h4>
+                    <div class="code-block">
+                        <pre><code><span class="comment">// Intern strings to save memory for duplicates</span>
+<span class="class">String</span> s1 = <span class="string">"hello"</span>.<span class="method">intern</span>();
+<span class="class">String</span> s2 = someInput.<span class="method">intern</span>();
+
+<span class="comment">// Now s1 == s2 if they have same content</span>
+<span class="keyword">if</span> (s1 == s2) {
+    <span class="comment">// Same memory location!</span>
+}</code></pre>
+                    </div>
+
+                    <div class="tip">
+                        <h4>💡 Performance Tips</h4>
+                        <ul>
+                            <li>Profile before optimizing - don't guess</li>
+                            <li>Measure first, optimize second</li>
+                            <li>Focus on biggest bottlenecks</li>
+                            <li>Use StringBuilder for loop concatenation</li>
+                            <li>Pool resources (connections, threads)</li>
+                            <li>Pre-size collections when possible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Course 2 -->
+
+        <!-- Resources Section -->
+        <div class="resources-section">
+            <h2>📚 Learning Resources</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Valuable external resources to continue your Java learning journey.</p>
+            
+            <div class="resources-grid">
+                <a href="https://docs.oracle.com/javase/8/docs/api/" target="_blank" class="resource-card">
+                    <h3>📖 Oracle Java SE 8 API Docs</h3>
+                    <p>Official Java 8 API documentation with complete class and method references.</p>
+                    <span class="tag">Official Docs</span>
+                </a>
+                <a href="https://docs.oracle.com/javase/17/docs/api/" target="_blank" class="resource-card">
+                    <h3>📖 Oracle Java SE 17 API Docs</h3>
+                    <p>Official Java 17 API documentation (current LTS version).</p>
+                    <span class="tag">Official Docs</span>
+                </a>
+                <a href="https://docs.oracle.com/javase/21/docs/api/" target="_blank" class="resource-card">
+                    <h3>📖 Oracle Java SE 21 API Docs</h3>
+                    <p>Official Java 21 API documentation (latest version).</p>
+                    <span class="tag">Official Docs</span>
+                </a>
+                <a href="https://docs.oracle.com/javase/tutorial/" target="_blank" class="resource-card">
+                    <h3>📚 Oracle Official Tutorials</h3>
+                    <p>Comprehensive Java tutorials from Oracle covering all fundamentals.</p>
+                    <span class="tag">Tutorials</span>
+                </a>
+                <a href="https://spring.io/projects/spring-boot" target="_blank" class="resource-card">
+                    <h3>🚀 Spring Boot</h3>
+                    <p>Build production-ready Spring applications quickly.</p>
+                    <span class="tag">Framework</span>
+                </a>
+                <a href="https://junit.org/junit5/docs/current/user/" target="_blank" class="resource-card">
+                    <h3>🧪 JUnit 5 Documentation</h3>
+                    <p>Official JUnit 5 testing framework documentation.</p>
+                    <span class="tag">Testing</span>
+                </a>
+                <a href="https://hibernate.org/orm/docs/" target="_blank" class="resource-card">
+                    <h3>🗄️ Hibernate ORM</h3>
+                    <p>Object-relational mapping framework for database operations.</p>
+                    <span class="tag">Database</span>
+                </a>
+                <a href="https://www.jetbrains.com/idea/" target="_blank" class="resource-card">
+                    <h3>💻 IntelliJ IDEA</h3>
+                    <p>Popular Java IDE with excellent code completion and refactoring.</p>
+                    <span class="tag">Tools</span>
+                </a>
+                <a href="https://www.java.com/download/" target="_blank" class="resource-card">
+                    <h3>☕ Java Download</h3>
+                    <p>Download the latest JDK from official Oracle website.</p>
+                    <span class="tag">Tools</span>
+                </a>
+                <a href="https://maven.apache.org/" target="_blank" class="resource-card">
+                    <h3>📦 Apache Maven</h3>
+                    <p>Build automation tool and dependency management.</p>
+                    <span class="tag">Tools</span>
+                </a>
+                <a href="https://gradle.org/" target="_blank" class="resource-card">
+                    <h3>⚙️ Gradle</h3>
+                    <p>Modern build automation tool with Kotlin DSL support.</p>
+                    <span class="tag">Tools</span>
+                </a>
+                <a href="https://www.baeldung.com/" target="_blank" class="resource-card">
+                    <h3>📘 Baeldung</h3>
+                    <p>Excellent Java tutorials and Spring framework guides.</p>
+                    <span class="tag">Tutorials</span>
+                </a>
+            </div>
+        </div>
 
     </div>
-
-    <footer>
         <p>© 2026 JavaMastery. All rights reserved. Happy Coding! ☕</p>
     </footer>
 
@@ -1986,6 +3292,72 @@ names.<span class="method">stream</span>()
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        });
+
+        // Course Switching
+        function switchCourse(courseId) {
+            // Hide all courses
+            document.querySelectorAll('.course-content').forEach(course => {
+                course.classList.remove('active');
+            });
+            
+            // Show selected course
+            document.getElementById(courseId).classList.add('active');
+            
+            // Update tab styling
+            document.querySelectorAll('.course-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update jump-to navigation
+            updateJumpToNav(courseId);
+        }
+
+        // Jump To Navigation
+        function updateJumpToNav(courseId) {
+            const course = document.getElementById(courseId);
+            const jumpToList = document.getElementById('jumpToList');
+            if (!course || !jumpToList) return;
+            
+            let html = '';
+            
+            if (courseId === 'course1') {
+                const modules = [
+                    { id: 'module1', title: '1. Java Fundamentals' },
+                    { id: 'module2', title: '2. OOP' },
+                    { id: 'module3', title: '3. Data Structures' },
+                    { id: 'module4', title: '4. Algorithms' },
+                    { id: 'module5', title: '5. Exception Handling' },
+                    { id: 'module6', title: '6. File I/O' },
+                    { id: 'module7', title: '7. Generics' },
+                    { id: 'module8', title: '8. Lambdas & Streams' }
+                ];
+                
+                html = modules.map(m => 
+                    `<li><a href="#${m.id}">${m.title}</a></li>`
+                ).join('');
+            } else {
+                const modules = [
+                    { id: 'module9', title: '9. Multithreading' },
+                    { id: 'module10', title: '10. Design Patterns' },
+                    { id: 'module11', title: '11. Spring Boot' },
+                    { id: 'module12', title: '12. Testing' },
+                    { id: 'module13', title: '13. Database & JPA' },
+                    { id: 'module14', title: '14. Performance' }
+                ];
+                
+                html = modules.map(m => 
+                    `<li><a href="#${m.id}">${m.title}</a></li>`
+                ).join('');
+            }
+            
+            jumpToList.innerHTML = html;
+        }
+
+        // Initialize jump-to nav
+        document.addEventListener('DOMContentLoaded', () => {
+            updateJumpToNav('course1');
         });
     </script>
 </body>
